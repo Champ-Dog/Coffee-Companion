@@ -2,6 +2,7 @@ require './coffee'
 
 describe Coffee do
   let(:kamwangi) { Coffee.new('kenya', 'kamwangi') }
+  let(:decaf) { Coffee.new('Colombia', 'la serrania') }
 
   it 'can be instantiated' do
     expect(kamwangi).not_to be_nil
@@ -28,33 +29,40 @@ describe Coffee do
     end
   end
 
-  describe '.highlight' do
-    it 'returns the highlight array' do
-      expect(kamwangi.highlight).to eq []
-    end
+  it 'has other necessary attributes' do
+    # describe '.highlight' do
+    #   it 'returns the highlight array' do
+        expect(kamwangi.highlight).to eq []
+    #   end
+    # end
+
+    # describe '.minimise' do
+    #   it 'returns the minimise array' do
+        expect(kamwangi.minimise).to eq []
+    #   end
+    # end
+
+    # describe '.tactile' do
+    #   it 'returns the tactile array' do
+        expect(kamwangi.tactile).to eq []
+    #   end
+    # end
+
+    # describe '.tactile' do
+    #   it 'returns the tactile array' do
+        expect(kamwangi.tactile).to eq []
+    #   end
+    # end
+
+    # describe '.recipes' do
+    #   it 'returns the recipes array' do
+        expect(kamwangi.recipes).to eq []
+    #   end
+    # end
   end
 
-  describe '.minimise' do
-    it 'returns the minimise array' do
-      expect(kamwangi.minimise).to eq []
-    end
+  it 'tracks member objects' do
+    expect(kamwangi.list).to eq ['#<Coffee:0x00007fa381377f18 @origin="Kenya", @name="Kamwangi", @highlight=[], @minimise=[], @tactile...3813479d0 @origin="Kenya", @name="Kamwangi", @highlight=[], @minimise=[], @tactile=[], @recipes=[]>']
   end
 
-  describe '.tactile' do
-    it 'returns the tactile array' do
-      expect(kamwangi.tactile).to eq []
-    end
-  end
-
-  describe '.tactile' do
-    it 'returns the tactile array' do
-      expect(kamwangi.tactile).to eq []
-    end
-  end
-
-  describe '.recipes' do
-    it 'returns the recipes array' do
-      expect(kamwangi.recipes).to eq []
-    end
-  end
 end
