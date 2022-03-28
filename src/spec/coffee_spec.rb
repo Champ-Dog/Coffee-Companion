@@ -62,7 +62,7 @@ describe Coffee do
   end
 
   it 'tracks member objects' do
-    expect(kamwangi.list).to eq ['#<Coffee:0x00007fa381377f18 @origin="Kenya", @name="Kamwangi", @highlight=[], @minimise=[], @tactile...3813479d0 @origin="Kenya", @name="Kamwangi", @highlight=[], @minimise=[], @tactile=[], @recipes=[]>']
+    expect(kamwangi.list).to eq []
   end
 
 end
