@@ -1,6 +1,10 @@
 require './coffee'
 
 describe Coffee do
+  it 'contains array to store member objects' do
+    expect(Coffee.list.length).to eq 0
+  end
+
   let(:kamwangi) { Coffee.new('kenya', 'kamwangi') }
   let(:decaf) { Coffee.new('Colombia', 'la serrania') }
 
@@ -30,39 +34,22 @@ describe Coffee do
   end
 
   it 'has other necessary attributes' do
-    # describe '.highlight' do
-    #   it 'returns the highlight array' do
-        expect(kamwangi.highlight).to eq []
-    #   end
-    # end
-
-    # describe '.minimise' do
-    #   it 'returns the minimise array' do
-        expect(kamwangi.minimise).to eq []
-    #   end
-    # end
-
-    # describe '.tactile' do
-    #   it 'returns the tactile array' do
-        expect(kamwangi.tactile).to eq []
-    #   end
-    # end
-
-    # describe '.tactile' do
-    #   it 'returns the tactile array' do
-        expect(kamwangi.tactile).to eq []
-    #   end
-    # end
-
-    # describe '.recipes' do
-    #   it 'returns the recipes array' do
-        expect(kamwangi.recipes).to eq []
-    #   end
-    # end
+    expect(kamwangi.highlight).to eq []
+    expect(kamwangi.minimise).to eq []
+    expect(kamwangi.tactile).to eq []
+    expect(kamwangi.tactile).to eq []
+    expect(kamwangi.recipes).to eq []
   end
 
-  it 'tracks member objects' do
-    expect(kamwangi.list).to eq []
+  it 'stores member objects' do
+    expect(Coffee.list.length).to eq 2
+  end
+
+  describe Coffee.list do
+    it 'returns a list of Coffee class objects' do
+      expect(Coffee.list).to include('Kamwangi')
+      # expect(Coffee.list).not_to include(!Coffee)
+    end
   end
 
 end

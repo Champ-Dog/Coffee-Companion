@@ -15,7 +15,7 @@ class Coffee
     @@coffees << self
   end
 
-  def list
+  def self.list
     return @@coffees
   end
 end
@@ -23,8 +23,8 @@ end
 # kamwangi = Coffee.new('kenya', 'kamwangi')
 # gachatha = Coffee.new('kenya', 'gachatha')
 
-# kamwangi.highlight << 'blackberry, apple'
-# kamwangi.highlight << 'orange'
+# # kamwangi.highlight << 'blackberry, apple'
+# # kamwangi.highlight << 'orange'
 
 
-# p kamwangi.list
+# p Coffee.list
