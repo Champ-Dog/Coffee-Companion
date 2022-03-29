@@ -8,6 +8,7 @@ def create
     key(:origin).ask('Origin:')
     key(:name).ask('Name:')
   end
+  return result[:origin], result[:name]
 #   x = Coffee.new("#{result[:origin]}", "#{result[:name]}") - THIS NEEDS TO BE ELSEWHERE TO MODULARISE METHODS
 end
 

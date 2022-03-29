@@ -5,11 +5,12 @@ require './prompt'
 
 prompt = TTY::Prompt.new
 system "clear"
+new_coffee = []
 puts "Welcome to the Coffee Companion"
 welcome = prompt.select("What would you like to do?", %w(Create Edit Search Exit))
 
 if welcome == 'Create'
-  create
+  new_coffee << create 
   add_more
 elsif welcome == 'Exit'
   puts 'Goodbye'
@@ -17,8 +18,7 @@ else
   puts 'Not configured!'
 end
 
-kamwangi = Coffee.new('kenya', 'kamwangi')
-gachatha = Coffee.new('kenya', 'gachatha')
+p new_coffee.flatten
 
 # y = JSON.load_file('coffees.json', symbolize_names: true)
 # y << Coffee.to_json
