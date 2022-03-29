@@ -5,3 +5,6 @@ source "https://rubygems.org"
 # gem "rails"
 
 gem "rspec", "~> 3.11"
+
+# tty-prompt gem is used to obtain user inputs from the terminal
+gem "tty-prompt"

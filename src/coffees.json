@@ -1,5 +1,5 @@
 [
-{
+  {
     "origin": "Kenya",
     "name": "Kamwangi",
     "highlight": [
@@ -14,8 +14,8 @@
     "recipes": [
 
     ]
-},
-{
+  },
+  {
     "origin": "Kenya",
     "name": "Gachatha",
     "highlight": [
@@ -30,5 +30,6 @@
     "recipes": [
 
     ]
-}
+  }
+ 
 ]
