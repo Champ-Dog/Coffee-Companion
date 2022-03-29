@@ -18,6 +18,24 @@ class Coffee
   def self.list
     return @@coffees
   end
+
+  def to_json
+    {
+      origin: @origin,
+      name: @name,
+      highlight: @highlight,
+      minimise: @minimise,
+      tactile: @tactile,
+      recipes: @recipes,
+    }
+  end
+
+  def self.to_json
+    @@coffees.map do |x|
+      x.to_json
+    end
+  end
+
 end
 
 # kamwangi = Coffee.new('kenya', 'kamwangi')

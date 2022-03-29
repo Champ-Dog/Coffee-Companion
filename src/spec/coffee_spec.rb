@@ -46,9 +46,8 @@ describe Coffee do
   end
 
   describe Coffee.list do
-    it 'returns a list of Coffee class objects' do
-      expect(Coffee.list).to include('Kamwangi')
-      # expect(Coffee.list).not_to include(!Coffee)
+    it 'returns array of all Coffee class objects' do
+      expect(Coffee.list).to include(kamwangi, decaf)
     end
   end
 
