@@ -7,9 +7,9 @@ class Coffee
   def initialize(origin, name)
     @origin = origin.capitalize
     @name = name.capitalize
-    @highlight = []
-    @minimise = []
-    @tactile = []
+    @highlight = [].flatten
+    @minimise = [].flatten
+    @tactile = [].flatten
     @recipes = []
 
     @@coffees << self
@@ -17,6 +17,14 @@ class Coffee
 
   def self.list
     return @@coffees
+  end
+
+  def self.search_origin(origin)
+    @@coffees.select { |bean| bean.origin == origin }
+  end
+
+  def self.search_name(name)
+    @@coffees.select { |bean| bean.name == name }
   end
 
   def to_json
@@ -36,13 +44,20 @@ class Coffee
     end
   end
 
+  def self.search_name(name)
+    @@coffees.select { |foo| foo.name == name }
+  end
+
 end
 
 # kamwangi = Coffee.new('kenya', 'kamwangi')
-# gachatha = Coffee.new('kenya', 'gachatha')
+# kamwangi = Coffee.new('kenya', 'kamwangi2')
+# kamwangi = Coffee.new('kenya', 'kamwangi3')
+# # gachatha = Coffee.new('kenya', 'gachatha')
 
-# # kamwangi.highlight << 'blackberry, apple'
-# # kamwangi.highlight << 'orange'
+# # # kamwangi.highlight << 'blackberry, apple'
+# # # kamwangi.highlight << 'orange'
 
 
-# p Coffee.list
+# puts Coffee.list
+# p kamwangi
