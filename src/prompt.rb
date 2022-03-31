@@ -14,23 +14,23 @@ def create
 end
 
 # Defined here to be re-used in search/edit features
-def add_more
-  prompt = TTY::Prompt.new
-  new_info = []
-  add_more = prompt.select("Would you like to add more information?", %w(Cupping-Notes Recipe No))
-  case add_more 
-  when 'Cupping-Notes'
-    new_info << cupping_notes
-    puts 'New record created!'
-    return new_info
-  when 'Recipe'
-    new_info << recipe
-    puts 'New record created!'
-    return new_info
-  when 'No'
-    puts 'New record created!'
-  end
-end
+# def add_more
+#   prompt = TTY::Prompt.new
+#   new_info = []
+#   add_more = prompt.select("Would you like to add more information?", %w(Cupping-Notes Recipe No))
+#   case add_more 
+#   when 'Cupping-Notes'
+#     new_info << cupping_notes
+#     puts 'New record created!'
+#     return new_info
+#   when 'Recipe'
+#     new_info << recipe
+#     puts 'New record created!'
+#     return new_info
+#   when 'No'
+#     puts 'New record created!'
+#   end
+# end
 
 def cupping_notes
   prompt = TTY::Prompt.new

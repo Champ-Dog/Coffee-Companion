@@ -1,26 +1,42 @@
 require 'oj'
 require './coffee'
 
+# kamwangi = Coffee.new('kenya', 'kamwangi', 'high', 'min', 'tact',)
+# p kamwangi
+
+# kamwangi.recipes << [21, 56, 23, 9, 22.5]
+# p kamwangi
+
+x = Oj.load_file('./coffees.json')
+
+x.each do |coffee|
+    coffee = Coffee.new(coffee.origin, coffee.name, coffee.highlight.flatten, coffee.minimise.flatten, coffee.tactile.flatten, coffee.recipes)
+end
+
+Coffee.list.each do |coffee|
+    coffee.highlight.flatten!
+    coffee.minimise.flatten!
+    coffee.tactile.flatten!
+    coffee.recipes.flatten!
+end
+
+p Coffee.list
+
+# Coffee.list << x
+# puts "New coffee list"
+# p Coffee.list
+
+# puts
+# p Coffee
+
 # kamwangi = Coffee.new('kenya', 'kamwangi')
-x = []
+# gacatha = Coffee.new('kenya', 'gachatha')
+# decaf = Coffee.new('colombia', 'la serrania')
+# puts "Updated list now"
+# p (Coffee.list[1]).name
+# p (x[1]).name
 
-p x
-puts "Initial list follows"
-p Coffee.list
+# puts "New x"
+# p Coffee.list
 
-x << Oj.load_file('./coffees.json')
-puts "After parsing"
-p Coffee.list
-puts "and x is"
-p x
-
-kamwangi = Coffee.new('kenya', 'kamwangi')
-gacatha = Coffee.new('kenya', 'gachatha')
-decaf = Coffee.new('colombia', 'la serrania')
-puts "Updated list now"
-x = Coffee.list
-
-puts "New x"
-p x
-
-Oj.to_file('./coffees.json', x)
+# Oj.to_file('./coffees.json', x)

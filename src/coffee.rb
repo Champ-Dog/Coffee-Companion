@@ -4,13 +4,13 @@ class Coffee
 
   @@coffees = []
 
-  def initialize(origin, name)
-    @origin = origin.capitalize
-    @name = name.capitalize
-    @highlight = [].flatten
-    @minimise = [].flatten
-    @tactile = [].flatten
-    @recipes = []
+  def initialize(origin, name, highlight = nil, minimise = nil, tactile = nil, recipes = nil)
+    @origin = origin
+    @name = name
+    @highlight = [highlight]
+    @minimise = [minimise]
+    @tactile = [tactile]
+    @recipes = [recipes]
     # Self-populate class attribute @@coffees to track all class objects
     @@coffees << self
   end
