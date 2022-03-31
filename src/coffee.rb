@@ -7,7 +7,7 @@ class Coffee
   def initialize(origin, name, highlight = nil, minimise = nil, tactile = nil, recipes = nil)
     @origin = origin
     @name = name
-    @highlight = [highlight]
+    @highlight = %w{highlight}
     @minimise = [minimise]
     @tactile = [tactile]
     @recipes = [recipes]
