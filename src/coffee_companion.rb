@@ -33,7 +33,7 @@ until welcome == 'Exit'
     # new_coffee = []
     new_coffee = create
     # p new_coffee
-    # new_coffee.flatten!
+    new_coffee.flatten!
     build_coffee = Coffee.new("#{new_coffee[0]}", "#{new_coffee[1]}")
     add_more = prompt.select("Would you like to add more information?", %w(Cupping-Notes Recipe No))
     case add_more 
@@ -50,6 +50,7 @@ until welcome == 'Exit'
     when 'No'
       puts 'New record created!'
       p build_coffee
+      p Coffee.list
     end
     welcome = prompt.select("What would you like to do?", %w(Create Edit Search Exit))
   when 'Search'
@@ -83,8 +84,9 @@ until welcome == 'Exit'
   end
 end
 
-p new_coffee.flatten(1)
-p Coffee.list
+save_coffees = Coffee.list
+Oj.to_file('./coffees.json', save_coffees)
+p save_coffees
 # .flatten(1)  - DON'T FLATTEN IN PRODUCTION! NEED CONTENTS SEPARATE TO PRESERVE ATTRIBUTE SEPARATION
 
 # y = JSON.load_file('coffees.json', symbolize_names: true)
