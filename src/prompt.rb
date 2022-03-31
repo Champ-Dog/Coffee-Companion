@@ -2,6 +2,8 @@ require './coffee'
 require 'json'
 require "tty-prompt"
 
+
+#   x = Coffee.new("#{result[:origin]}", "#{result[:name]}") - THIS NEEDS TO BE ELSEWHERE TO MODULARISE METHODS
 def create
   prompt = TTY::Prompt.new
   result = prompt.collect do
@@ -9,9 +11,9 @@ def create
     key(:name).ask('Name:')
   end
   return result[:origin], result[:name]
-#   x = Coffee.new("#{result[:origin]}", "#{result[:name]}") - THIS NEEDS TO BE ELSEWHERE TO MODULARISE METHODS
 end
 
+# Defined here to be re-used in search/edit features
 def add_more
   prompt = TTY::Prompt.new
   new_info = []
@@ -37,7 +39,8 @@ def cupping_notes
     key(:minimise).ask('Minimise:')
     key(:tactile).ask('Tactile:')
   end
-  return result[:highlight], result[:minimise], result[:tactile]
+  flavour = [result[:highlight], result[:minimise], result[:tactile]]
+  return flavour
 end
 
 def calculate_extraction(dose, out, tds)
@@ -103,10 +106,10 @@ def search_type
   return search_by
 end
 
+ # INPUT MUST BE CAPITALIZED!
 def search_term
   prompt = TTY::Prompt.new
   search_for = prompt.ask("Please enter the term to search for")
-  # return search_for.capitalize
 end
 # x = Coffee.search_price(100)
 #  Coffee.search_origin(input).each do |match|

@@ -11,7 +11,7 @@ class Coffee
     @minimise = [].flatten
     @tactile = [].flatten
     @recipes = []
-
+    # Self-populate class attribute @@coffees to track all class objects
     @@coffees << self
   end
 
@@ -43,21 +43,4 @@ class Coffee
       x.to_json
     end
   end
-
-  def self.search_name(name)
-    @@coffees.select { |foo| foo.name == name }
-  end
-
 end
-
-# kamwangi = Coffee.new('kenya', 'kamwangi')
-# kamwangi = Coffee.new('kenya', 'kamwangi2')
-# kamwangi = Coffee.new('kenya', 'kamwangi3')
-# # gachatha = Coffee.new('kenya', 'gachatha')
-
-# # # kamwangi.highlight << 'blackberry, apple'
-# # # kamwangi.highlight << 'orange'
-
-
-# puts Coffee.list
-# p kamwangi
