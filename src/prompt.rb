@@ -106,13 +106,14 @@ def search_type
   return search_by
 end
 
- # INPUT MUST BE CAPITALIZED!
+# INPUT MUST BE CAPITALIZED!
 def search_term
   prompt = TTY::Prompt.new
   search_for = prompt.ask("Please enter the term to search for")
+  return search_for
 end
-# x = Coffee.search_price(100)
-#  Coffee.search_origin(input).each do |match|
+
+# Below are methods to produce Summary display
 
 
 

@@ -1,10 +1,6 @@
 require './coffee'
 
 describe Coffee do
-  it 'contains array to store member objects' do
-    expect(Coffee.list.length).to eq 0
-  end
-
   let(:kamwangi) { Coffee.new('kenya', 'kamwangi') }
   let(:decaf) { Coffee.new('Colombia', 'la serrania') }
 
@@ -37,7 +33,6 @@ describe Coffee do
     expect(kamwangi.highlight).to eq []
     expect(kamwangi.minimise).to eq []
     expect(kamwangi.tactile).to eq []
-    expect(kamwangi.tactile).to eq []
     expect(kamwangi.recipes).to eq []
   end
 
@@ -51,4 +46,18 @@ describe Coffee do
     end
   end
 
+  describe 'parameter' do
+    before(:each) do
+      kamwangi.recipes << [21, 50, 26, 8.5, 20.5]
+      kamwangi.recipes << [20, 55, 27, 9, 21.5]
+    end
+
+    it 'returns all values at index [n] from @recipe arrays' do
+      expect(kamwangi.parameter(0)).to contain_exactly 21, 20
+    end
+
+    it 'sorts values from lowest to highest' do
+      expect(kamwangi.parameter(0)).to eq [20, 21]
+    end
+  end
 end

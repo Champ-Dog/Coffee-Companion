@@ -12,7 +12,7 @@ system "clear"
 # Rebuilds coffees from coffees.json - flattening is required as stored arrays will be fed into class attribute arrays
 stored_coffees = Oj.load_file('./coffees.json')
 stored_coffees.each do |coffee|
-    coffee = Coffee.new(coffee.origin, coffee.name, coffee.highlight, coffee.minimise, coffee.tactile, coffee.recipes)
+    Coffee.new(coffee.origin, coffee.name, coffee.highlight, coffee.minimise, coffee.tactile, coffee.recipes)
 end
 Coffee.list.each do |coffee|
     coffee.highlight.flatten!
