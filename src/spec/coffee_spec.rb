@@ -24,7 +24,7 @@ describe Coffee do
       expect(kamwangi.name).to eq 'Kamwangi'
     end
 
-    it 'capitalizes the origin' do
+    it 'capitalizes the name' do
       expect(kamwangi.name).to eq 'Kamwangi'
     end
   end

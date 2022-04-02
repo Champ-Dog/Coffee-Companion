@@ -59,8 +59,9 @@ def recipe # CHANGE CONVERSION ERROR MESSAGES
   end
   result[:ext] = calculate_extraction(result[:dose], result[:yield], result[:tds])
   puts "Your extraction is #{result[:ext]}"
-  recipe = [result[:dose], result[:yield], result[:time], result[:tds], result[:ext]]
-  return recipe
+  # recipe = [result[:dose], result[:yield], result[:time], result[:tds], result[:ext]]
+  return result
+  
 end
 
 # Methods used for searching stored Coffee objects
