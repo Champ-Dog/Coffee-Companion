@@ -1,4 +1,4 @@
-require './coffee'
+require_relative '../coffee'
 
 describe Coffee do
   let(:kamwangi) { Coffee.new('kenya', 'kamwangi') }
@@ -67,8 +67,8 @@ describe Coffee do
       kamwangi.recipes << [20, 55, 27, 9, 21.5]
       kamwangi.recipes << [20.5, 52, 26, 8.7, 21]
     end
-    
-    it 'converts recipe values into strings' do
+
+    it 'converts recipe values into Strings' do
       expect(kamwangi.summarise_recipe[0]).to be_a(String)
     end
 
@@ -83,11 +83,21 @@ describe Coffee do
     it 'does not return other values for that parameter' do
       expect(kamwangi.summarise_recipe[0]).not_to include '20.5'
     end
-    
+
     it 'returns a parameter label alongside the min/max values' do
       expect(kamwangi.summarise_recipe[1]).to include 'Yield:'
     end
-    
   end
+
+  describe 'summarise_name' do
+    it 'returns the origin and name of a coffee' do
+      expect(kamwangi.summarise_name).to include 'Kamwangi', 'Kenya'
+    end
+
+    it 'displays both in a single line, ordered as origin/name' do
+      expect(kamwangi.summarise_name).to eq 'Kenya Kamwangi'
+    end
+  end
+
 
 end

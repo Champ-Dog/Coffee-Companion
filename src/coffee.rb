@@ -26,6 +26,10 @@ class Coffee
     @@coffees.select { |bean| bean.name == name }
   end
 
+  def summarise_name
+    return "#{@origin} #{@name}"
+  end
+
   def parameter(index)
     parameter = []
     @recipes.each do |recipe|

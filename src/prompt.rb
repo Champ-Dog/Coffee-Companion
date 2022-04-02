@@ -1,6 +1,7 @@
-require './coffee'
+require_relative './coffee'
 require 'json'
-require "tty-prompt"
+require 'tty-prompt'
+require 'tty-file'
 
 
 #   x = Coffee.new("#{result[:origin]}", "#{result[:name]}") - THIS NEEDS TO BE ELSEWHERE TO MODULARISE METHODS
@@ -44,12 +45,13 @@ def cupping_notes
 end
 
 def calculate_extraction(dose, out, tds)
-  solids = (tds/100) * out
-  ext = solids/dose
-  return (ext.*100).round(2)
+  solids = (tds / 100) * out
+  ext = solids / dose
+  return (ext * 100).round(2)
 end
 
-def recipe # CHANGE CONVERSION ERROR MESSAGES
+# CHANGE CONVERSION ERROR MESSAGES
+def recipe
   prompt = TTY::Prompt.new
   result = prompt.collect do
     key(:dose).ask('Dose:', convert: :float)
@@ -59,10 +61,8 @@ def recipe # CHANGE CONVERSION ERROR MESSAGES
   end
   result[:ext] = calculate_extraction(result[:dose], result[:yield], result[:tds])
   puts "Your extraction is #{result[:ext]}"
-  # recipe = [result[:dose], result[:yield], result[:time], result[:tds], result[:ext]]
   new_recipe = [result[:dose], result[:yield], result[:time], result[:tds], result[:ext]]
   return new_recipe
-  
 end
 
 # Methods used for searching stored Coffee objects
@@ -131,7 +131,25 @@ end
 # end
 
 def summarise(coffee)
-  puts "#{coffee.origin} #{coffee.name}"
+  puts coffee.summarise_name
+  puts ''
+  puts "Recipe:"
+  coffee.summarise_recipe.each do |index|
+    puts "#{index}"
+  end
+  puts ''
+  puts "Highlight:"
+  puts coffee.highlight
+  puts ''
+  puts "Minimise:"
+  puts coffee.minimise[0]
+  puts ''
+  puts "Tactile:"
+  puts coffee.tactile[0]
+end
+
+def output(coffee)
+  puts coffee.summarise_name
   puts ''
   puts "Recipe:"
   coffee.summarise_recipe.each do |index|

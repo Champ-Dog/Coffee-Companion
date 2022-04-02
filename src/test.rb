@@ -1,6 +1,7 @@
 require 'oj'
 require './coffee'
 require './prompt'
+require 'tty-file'
 
 
 
@@ -13,9 +14,106 @@ kamwangi.recipes << [21.0, 50, 26, 8.5, 20.5]
 kamwangi.recipes << [20, 55, 23, 8, 21.5]
 kamwangi.recipes << [20.5, 53, 29, 9, 22]
 
-kamwangi.summarise_recipe
+kamwangi.highlight << ["grapefruit", "orange", "raspberry"]
+kamwangi.minimise <<  "quinine, orange rind, burnt butter, pastry"
+kamwangi.tactile << "creamy, effervescent"
+kamwangi.highlight << ["grapefruit, orange, raspberry"]
 
+p kamwangi.highlight
+
+
+puts kamwangi.summarise_recipe
+
+puts kamwangi.summarise_name
+
+puts kamwangi
+
+def kam_sum(coffee)
+coffee.summarise_recipe.each do |index|
+    puts "#{index}"
+    puts ""
+  end
+end
 # p kamwangi.recipes
+
+puts summarise(kamwangi)
+
+puts "this here"
+puts kamwangi.summarise_recipe
+
+def test_method(coffee)
+    return coffee.highlight.flatten.to_s
+end
+
+def print_highlight(coffee)
+    coffee.highlight.flatten!
+    index = 0
+    while index < (coffee.highlight.length - 1) do
+        print "#{coffee.highlight[index]}, "
+        index += 1
+    end
+    print "#{coffee.highlight[-1]}"
+end
+
+puts print_highlight(kamwangi)
+
+def output_highlight(coffee)
+    coffee.highlight.flatten!
+    (coffee.highlight.length - 1).times do |index|
+        print "#{coffee.highlight[index]}, "
+    end
+    print "#{coffee.highlight[-1]}"
+end
+
+puts output_highlight(kamwangi)
+
+# 5.times do |index|
+#       all_parameters << parameter(index)
+#     end
+
+def summary_to_file(coffee)
+    file = File.open("summaries.txt", "a")
+
+    file.puts coffee.summarise_name
+    file.puts ''
+    file.puts "Recipe:"
+    file.puts coffee.summarise_recipe
+    file.puts ''
+    file.puts "Highlight:"
+    coffee.highlight.flatten.each do |item|
+        file.print "#{item}, "
+    end
+    file.puts ''
+    file.puts ''
+    file.puts "Minimise:"
+    file.puts coffee.minimise
+    file.puts ''
+    file.puts "Tactile:"
+    file.puts coffee.tactile
+
+    file.close
+end
+
+summary_to_file(kamwangi)
+
+
+# # TTY::File.create_file "./kamwangi.txt"
+# TTY::File.append_to_file("kamwangi.txt") do
+#   "#{kamwangi.summarise_name}
+  
+#   Recipe:
+#   #{kam_sum(kamwangi)}
+  
+#   Highlight:
+#   #{kamwangi.highlight}
+ 
+#   Minimise
+#   #{kamwangi.minimise}
+  
+#   Tactile:
+#   #{kamwangi.tactile}
+#   "
+# end
 
 # def summarise(coffee) 
 #   all_parameters = []

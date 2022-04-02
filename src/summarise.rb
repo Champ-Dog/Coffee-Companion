@@ -16,7 +16,7 @@ module Summary
 #     puts coffee.tactile[0]
 # end
 
-display def summary_name(coffee)
-  thing_to_write = coffee
-  return thing_to_write
+# display def summary_name(coffee)
+#   thing_to_write = coffee
+#   return thing_to_write
 end
