@@ -4,9 +4,11 @@ require './coffee'
 kamwangi = Coffee.new('kenya', 'kamwangi')
 # p kamwangi
 
-kamwangi.recipes << [21, 50, 26, 8.5, 20.5]
+kamwangi.recipes << [21.0, 50, 26, 8.5, 20.5]
 kamwangi.recipes << [20, 55, 23, 8, 21.5]
 kamwangi.recipes << [20.5, 53, 29, 9, 22]
+
+p kamwangi.recipes
 
 def summarise(coffee) 
   all_parameters = []

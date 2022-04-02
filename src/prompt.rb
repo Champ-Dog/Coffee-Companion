@@ -117,7 +117,33 @@ end
 # Below are methods to produce Summary display
 
 
+def summarise_recipe(coffee) 
+  all_parameters = []
+  5.times do |index|
+    all_parameters << coffee.parameter(index)
+  end
 
+  headings = %w[Dose Yield Time TDS EXT]
+  headings.zip(all_parameters).each do |index, value|
+    puts "#{index}: #{value[0]} - #{value[-1]}"
+  end
+end
+
+def summarise(coffee)
+  puts "#{coffee.origin} #{coffee.name}"
+  puts ''
+  puts "Recipe:"
+  summarise_recipe(coffee)
+  puts ''
+  puts "Highlight:"
+  puts coffee.highlight
+  puts ''
+  puts "Minimise:"
+  puts coffee.minimise[0]
+  puts ''
+  puts "Tactile:"
+  puts coffee.tactile[0]
+end
 
 #   prompt = TTY::Prompt.new
 #   search_by = prompt.select("How would you like to search?", %w(Origin Name))

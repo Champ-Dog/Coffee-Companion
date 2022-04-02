@@ -77,7 +77,7 @@ until welcome == 'Exit'
       end
       selection = prompt.ask("Please enter a selection (1/2/etc)", convert: :int)
       selected_object = results[selection - 1]
-      p selected_object
+      summarise(selected_object)
     end
     welcome = prompt.select("What would you like to do?", %w(Create Edit Search Exit))
   when 'Exit'
