@@ -60,7 +60,8 @@ def recipe # CHANGE CONVERSION ERROR MESSAGES
   result[:ext] = calculate_extraction(result[:dose], result[:yield], result[:tds])
   puts "Your extraction is #{result[:ext]}"
   # recipe = [result[:dose], result[:yield], result[:time], result[:tds], result[:ext]]
-  return result
+  new_recipe = [result[:dose], result[:yield], result[:tds], result[:ext]]
+  return new_recipe
   
 end
 

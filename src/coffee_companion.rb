@@ -48,8 +48,8 @@ until welcome == 'Exit'
       build_coffee.tactile << new_coffee[4]
       puts 'New record created!'
     when 'Recipe'
-      new_coffee = recipe
-      build_coffee.recipes << new_coffee[2]
+      # new_coffee = recipe
+      build_coffee.recipes << recipe
       puts 'New record created!'
     when 'No'
       puts 'New record created!'
