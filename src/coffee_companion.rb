@@ -9,7 +9,9 @@ require 'oj'
 prompt = TTY::Prompt.new
 system "clear"
 
-# Rebuilds coffees from coffees.json - flattening is required as stored arrays will be fed into class attribute arrays
+# Rebuilds coffees from coffees.json - flattening is required to avoid multi-dimensional arrays.
+# Importantly, @recipes needs to have depth set to one on flatten, as seperate recipes need to remain as seperate arrays.
+
 stored_coffees = Oj.load_file('./coffees.json')
 stored_coffees.each do |coffee|
   rebuilt_coffee = Coffee.new(coffee.origin, coffee.name)

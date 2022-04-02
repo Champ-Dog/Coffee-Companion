@@ -60,7 +60,7 @@ def recipe # CHANGE CONVERSION ERROR MESSAGES
   result[:ext] = calculate_extraction(result[:dose], result[:yield], result[:tds])
   puts "Your extraction is #{result[:ext]}"
   # recipe = [result[:dose], result[:yield], result[:time], result[:tds], result[:ext]]
-  new_recipe = [result[:dose], result[:yield], result[:tds], result[:ext]]
+  new_recipe = [result[:dose], result[:yield], result[:time], result[:tds], result[:ext]]
   return new_recipe
   
 end
@@ -118,23 +118,25 @@ end
 # Below are methods to produce Summary display
 
 
-def summarise_recipe(coffee) 
-  all_parameters = []
-  5.times do |index|
-    all_parameters << coffee.parameter(index)
-  end
+# def summarise_recipe(coffee) 
+#   all_parameters = []
+#   5.times do |index|
+#     all_parameters << coffee.parameter(index)
+#   end
 
-  headings = %w[Dose Yield Time TDS EXT]
-  headings.zip(all_parameters).each do |index, value|
-    puts "#{index}: #{value[0]} - #{value[-1]}"
-  end
-end
+#   headings = %w[Dose Yield Time TDS EXT]
+#   headings.zip(all_parameters).each do |index, value|
+#     puts "#{index}: #{value[0]} - #{value[-1]}"
+#   end
+# end
 
 def summarise(coffee)
   puts "#{coffee.origin} #{coffee.name}"
   puts ''
   puts "Recipe:"
-  summarise_recipe(coffee)
+  coffee.summarise_recipe.each do |index|
+    puts "#{index}"
+  end
   puts ''
   puts "Highlight:"
   puts coffee.highlight

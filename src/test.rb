@@ -1,28 +1,35 @@
 require 'oj'
 require './coffee'
+require './prompt'
+
+
+
+
 
 kamwangi = Coffee.new('kenya', 'kamwangi')
-# p kamwangi
+# # p kamwangi
 
 kamwangi.recipes << [21.0, 50, 26, 8.5, 20.5]
 kamwangi.recipes << [20, 55, 23, 8, 21.5]
 kamwangi.recipes << [20.5, 53, 29, 9, 22]
 
-p kamwangi.recipes
+kamwangi.summarise_recipe
 
-def summarise(coffee) 
-  all_parameters = []
-  5.times do |index|
-    all_parameters << coffee.parameter(index)
-  end
+# p kamwangi.recipes
 
-  headings = %w[Dose Yield Time TDS EXT]
-  headings.zip(all_parameters).each do |index, value|
-    puts "#{index}: #{value[0]} - #{value[-1]}"
-  end
-end
+# def summarise(coffee) 
+#   all_parameters = []
+#   5.times do |index|
+#     all_parameters << coffee.parameter(index)
+#   end
 
-summarise(kamwangi)
+#   headings = %w[Dose Yield Time TDS EXT]
+#   headings.zip(all_parameters).each do |index, value|
+#     puts "#{index}: #{value[0]} - #{value[-1]}"
+#   end
+# end
+
+# summarise(kamwangi)
 
 # kamwangi.highlight << 'other good thing, niceness'
 # # p kamwangi.recipes

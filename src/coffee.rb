@@ -34,6 +34,20 @@ class Coffee
     return parameter.sort
   end
 
+  def summarise_recipe
+    all_parameters = []
+    5.times do |index|
+      all_parameters << parameter(index)
+    end
+
+    headings = %w[Dose Yield Time TDS EXT]
+    output = []
+    headings.zip(all_parameters).each do |index, value|
+      output << "#{index}: #{value[0]} - #{value[-1]}"
+    end
+    return output
+  end
+
   # def parameters
   #   parameters = []
   #   5.times do |index|
