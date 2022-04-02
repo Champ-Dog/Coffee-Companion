@@ -17,13 +17,16 @@ stored_coffees.each do |coffee|
   rebuilt_coffee.minimise << coffee.minimise
   rebuilt_coffee.tactile << coffee.tactile
   rebuilt_coffee.recipes << coffee.recipes
+  # p coffee.recipes
+  # p rebuilt_coffee.recipes
 end
 Coffee.list.each do |coffee|
     coffee.highlight.flatten!
     coffee.minimise.flatten!
     coffee.tactile.flatten!
-    coffee.recipes.flatten!
+    coffee.recipes.flatten!(1)
 end
+p Coffee.list
 
 puts "Welcome to the Coffee Companion"
 
