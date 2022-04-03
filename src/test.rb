@@ -58,14 +58,16 @@ end
 puts print_highlight(kamwangi)
 
 def output_highlight(coffee)
+    file = File.open("summaries.txt", "a")
     coffee.highlight.flatten!
     (coffee.highlight.length - 1).times do |index|
-        print "#{coffee.highlight[index]}, "
+        file.print "#{coffee.highlight[index]}, "
     end
-    print "#{coffee.highlight[-1]}"
+    file.print "#{coffee.highlight[-1]}"
+    file.close
 end
 
-puts output_highlight(kamwangi)
+# puts output_highlight(kamwangi)
 
 # 5.times do |index|
 #       all_parameters << parameter(index)
@@ -80,9 +82,7 @@ def summary_to_file(coffee)
     file.puts coffee.summarise_recipe
     file.puts ''
     file.puts "Highlight:"
-    coffee.highlight.flatten.each do |item|
-        file.print "#{item}, "
-    end
+
     file.puts ''
     file.puts ''
     file.puts "Minimise:"
@@ -96,7 +96,10 @@ end
 
 summary_to_file(kamwangi)
 
-
+file = File.open("summaries.txt", "a")
+file.puts "Highlight:"
+output_highlight(kamwangi)
+file.close
 # # TTY::File.create_file "./kamwangi.txt"
 # TTY::File.append_to_file("kamwangi.txt") do
 #   "#{kamwangi.summarise_name}

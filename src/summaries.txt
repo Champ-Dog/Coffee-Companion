@@ -1,3 +1,9 @@
+grapefruit, orange, raspberry, grapefruit, orange, raspberryHighlight:
+Highlight:
+
+grapefruit, orange, raspberry, grapefruit, orange, raspberryHighlight:
+Highlight:
+
 Kenya Kamwangi
 
 Recipe:
@@ -8,146 +14,11 @@ TDS: 8 - 9
 EXT: 20.5 - 22
 
 Highlight:
-grapefruit, orange, raspberry, grapefruit, orange, raspberry, 
+
 
 Minimise:
 quinine, orange rind, burnt butter, pastry
 
 Tactile:
 creamy, effervescent
-Kenya Kamwangi
-
-Recipe:
-Dose: 20 - 21.0
-Yield: 50 - 55
-Time: 23 - 29
-TDS: 8 - 9
-EXT: 20.5 - 22
-
-Highlight:
-grapefruit, orange, raspberry, grapefruit, orange, raspberry, 
-
-Minimise:
-quinine, orange rind, burnt butter, pastry
-
-Tactile:
-creamy, effervescent
-Kenya Kamwangi
-
-Recipe:
-Dose: 20 - 21.0
-Yield: 50 - 55
-Time: 23 - 29
-TDS: 8 - 9
-EXT: 20.5 - 22
-
-Highlight:
-grapefruit, orange, raspberry, grapefruit, orange, raspberry, 
-
-Minimise:
-quinine, orange rind, burnt butter, pastry
-
-Tactile:
-creamy, effervescent
-Kenya Kamwangi
-
-Recipe:
-Dose: 20 - 21.0
-Yield: 50 - 55
-Time: 23 - 29
-TDS: 8 - 9
-EXT: 20.5 - 22
-
-Highlight:
-grapefruit, orange, raspberry, grapefruit, orange, raspberry, 
-
-Minimise:
-quinine, orange rind, burnt butter, pastry
-
-Tactile:
-creamy, effervescent
-Kenya Kamwangi
-
-Recipe:
-Dose: 20 - 21.0
-Yield: 50 - 55
-Time: 23 - 29
-TDS: 8 - 9
-EXT: 20.5 - 22
-
-Highlight:
-grapefruit, orange, raspberry, grapefruit, orange, raspberry, 
-
-Minimise:
-quinine, orange rind, burnt butter, pastry
-
-Tactile:
-creamy, effervescent
-Kenya Kamwangi
-
-Recipe:
-Dose: 20 - 21.0
-Yield: 50 - 55
-Time: 23 - 29
-TDS: 8 - 9
-EXT: 20.5 - 22
-
-Highlight:
-grapefruit, orange, raspberry, grapefruit, orange, raspberry, 
-
-Minimise:
-quinine, orange rind, burnt butter, pastry
-
-Tactile:
-creamy, effervescent
-Kenya Kamwangi
-
-Recipe:
-Dose: 20 - 21.0
-Yield: 50 - 55
-Time: 23 - 29
-TDS: 8 - 9
-EXT: 20.5 - 22
-
-Highlight:
-grapefruit, orange, raspberry, grapefruit, orange, raspberry, 
-
-Minimise:
-quinine, orange rind, burnt butter, pastry
-
-Tactile:
-creamy, effervescent
-Kenya Kamwangi
-
-Recipe:
-Dose: 20 - 21.0
-Yield: 50 - 55
-Time: 23 - 29
-TDS: 8 - 9
-EXT: 20.5 - 22
-
-Highlight:
-grapefruit, orange, raspberry, grapefruit, orange, raspberry, 
-
-Minimise:
-quinine, orange rind, burnt butter, pastry
-
-Tactile:
-creamy, effervescent
-Kenya Kamwangi
-
-Recipe:
-Dose: 20 - 21.0
-Yield: 50 - 55
-Time: 23 - 29
-TDS: 8 - 9
-EXT: 20.5 - 22
-
-Highlight:
-grapefruit, orange, raspberry, grapefruit, orange, raspberry, 
-
-Minimise:
-quinine, orange rind, burnt butter, pastry
-
-Tactile:
-creamy, effervescent
+grapefruit, orange, raspberry, grapefruit, orange, raspberryHighlight:

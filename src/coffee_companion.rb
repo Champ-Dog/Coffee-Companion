@@ -1,7 +1,7 @@
-require './coffee'
+require_relative './coffee'
 require 'json'
 require "tty-prompt"
-require './prompt'
+require_relative './prompt'
 require 'oj'
 
 # App start + welcome
@@ -48,6 +48,7 @@ until welcome == 'Exit'
     case add_more 
     when 'Cupping-Notes'
       new_coffee << cupping_notes
+      new_coffee.flatten!
       build_coffee.highlight << new_coffee[2]
       build_coffee.minimise << new_coffee[3]
       build_coffee.tactile << new_coffee[4]

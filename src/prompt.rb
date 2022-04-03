@@ -3,13 +3,16 @@ require 'json'
 require 'tty-prompt'
 require 'tty-file'
 
+# prompt.ask("Enter text:") do |q|
+#   q.modify :strip, :collapse
+# end
 
 #   x = Coffee.new("#{result[:origin]}", "#{result[:name]}") - THIS NEEDS TO BE ELSEWHERE TO MODULARISE METHODS
 def create
   prompt = TTY::Prompt.new
   result = prompt.collect do
-    key(:origin).ask('Origin:')
-    key(:name).ask('Name:')
+    key(:origin).ask('Origin:', required: true, modify: :capitalize)
+    key(:name).ask('Name:', required: true, modify: :capitalize)
   end
   return result[:origin], result[:name]
 end
@@ -133,7 +136,7 @@ end
 def summarise(coffee)
   puts coffee.summarise_name
   puts ''
-  puts "Recipe:"
+  puts "Recipe Summary:"
   coffee.summarise_recipe.each do |index|
     puts "#{index}"
   end
@@ -142,10 +145,13 @@ def summarise(coffee)
   puts coffee.highlight
   puts ''
   puts "Minimise:"
-  puts coffee.minimise[0]
+  puts coffee.minimise
   puts ''
   puts "Tactile:"
-  puts coffee.tactile[0]
+  puts coffee.tactile
+  puts ''
+  puts "Recipes:"
+  puts coffee.recipes
 end
 
 def output(coffee)
