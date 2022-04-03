@@ -4,8 +4,8 @@ class Coffee
   @@coffees = []
 
   def initialize(origin, name)
-    @origin = origin
-    @name = name
+    @origin = origin.capitalize
+    @name = name.capitalize
     @highlight = []
     @minimise = []
     @tactile = []
