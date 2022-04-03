@@ -1,5 +1,5 @@
 require "tty-prompt"
-require_relative './coffee'
+# require_relative './coffee'
 require_relative './prompt'
 
 # This module contains the control structure and methods necessary to edit or export information about a coffee.

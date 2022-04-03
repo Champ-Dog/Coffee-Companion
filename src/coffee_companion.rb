@@ -37,7 +37,7 @@ puts "Welcome to the Coffee Companion"
 # Main program loop
 # Note that throughout the app style-guide suggestions must be ignored for tty-prompt to function.
 
-welcome = prompt.select("What would you like to do?", %w(Create Edit Search Exit)) 
+welcome = prompt.select("What would you like to do?", %w(Create Search Exit)) 
 until welcome == 'Exit'
   system "clear"
   case welcome
@@ -60,7 +60,7 @@ until welcome == 'Exit'
       p Coffee.list
     end
     puts 'New record created!'
-    welcome = prompt.select("What would you like to do?", %w(Create Edit Search Exit))
+    welcome = prompt.select("What would you like to do?", %w(Create Search Exit))
   
   when 'Search'
     type = search_type
@@ -83,13 +83,13 @@ until welcome == 'Exit'
       selection = prompt.ask("Please enter a selection (1/2/etc)", convert: :int)
       selected_object = results[selection - 1]
       system "clear"
-      selected_object.summarise
+      puts selected_object.summarise
       include Manipulate
       run_manipulate(selected_object)
 
 
     end
-    welcome = prompt.select("What would you like to do?", %w(Create Edit Search Exit))
+    welcome = prompt.select("What would you like to do?", %w(Create Search Exit))
   when 'Exit'
     puts 'Goodbye'
   else

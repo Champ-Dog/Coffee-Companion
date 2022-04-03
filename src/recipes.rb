@@ -14,12 +14,6 @@ module Recipes
     @recipes = []
   end
 
-  # def calculate_extraction(dose, out, tds)
-  #   solids = (tds / 100) * out
-  #   ext = solids / dose
-  #   return (ext * 100).round(2)
-  # end
-
   # This method groups all values for each @recipe parameter into seperate arrays e.g., an array with each recorded
   # dose, one with each recorded yield, etc. Refer to 'recipes_spec.rb' for specifics. This information is used in
   # 'recipe_summary' (below); and is not called elsewhere.
@@ -31,8 +25,8 @@ module Recipes
     return values.sort
   end
 
-  # This returns and formats a range (as 'min - max') for each recipe parameter, summarising the collected recipes
-  # of a coffee, for easier reporting. Refer to 'recipes_spec.rb' for specifics.
+  # This returns and formats a range (as 'min - max') for each recipe parameter; summarising the collected recipes
+  # of a coffee for easier reporting. Refer to 'recipes_spec.rb' for specifics.
   def recipe_summary
     all_parameters = []
     5.times do |index|

@@ -3,7 +3,9 @@
 # 'summarise_'
 module Summaries
   def summarise_bean
-    return "#{@origin} #{@name}"
+    # output = []
+    # output << [@origin, @name]
+    return "#{@origin.upcase} #{@name.upcase}"
   end
 
   # Calling this method with puts (i.e., 'puts (coffee).summarise_recipe') will display a well-formatted, easily read
@@ -11,7 +13,7 @@ module Summaries
   def summarise_recipe
     output = ["Recipe Summary:"]
     recipe_summary.each do |index|
-      output << "#{index}"
+      output << index
     end
     return output
   end
@@ -19,9 +21,9 @@ module Summaries
   # This method gathers stored cupping notes together to pass to the 'summarise_cupping' method before display/export
   def summarise_notes
     notes = []
-    notes << highlight.flatten.join(' ')
-    notes << minimise.flatten.join(' ')
-    notes << tactile.flatten.join(' ')
+    notes << @highlight.flatten.join(' ')
+    notes << @minimise.flatten.join(' ')
+    notes << @tactile.flatten.join(' ')
     return notes
   end
 
@@ -39,9 +41,11 @@ module Summaries
   end
   
   def summarise
-    summarise_bean
-    summarise_notes
-    summarise_cupping
+    output = []
+    output << summarise_bean
+    output << summarise_recipe
+    output << summarise_cupping
+    return output
   end
 end
 # def summarise(coffee)
