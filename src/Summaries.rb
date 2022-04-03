@@ -5,8 +5,8 @@ module Summaries
     return "#{@origin} #{@name}"
   end
 
-  def display_name
-    return
+  # def display_name
+  #   return
 
 end
 

@@ -46,48 +46,48 @@ describe Coffee do
     end
   end
 
-  describe 'parameter' do
-    before(:each) do
-      kamwangi.recipes << [21, 50, 26, 8.5, 20.5]
-      kamwangi.recipes << [20, 55, 27, 9, 21.5]
-    end
+  # describe 'parameter' do
+  #   before(:each) do
+  #     kamwangi.recipes << [21, 50, 26, 8.5, 20.5]
+  #     kamwangi.recipes << [20, 55, 27, 9, 21.5]
+  #   end
 
-    it 'returns all values at index [n] from @recipe arrays' do
-      expect(kamwangi.parameter(0)).to contain_exactly 21, 20
-    end
+  #   it 'returns all values at index [n] from @recipe arrays' do
+  #     expect(kamwangi.parameter(0)).to contain_exactly 21, 20
+  #   end
 
-    it 'sorts values from lowest to highest' do
-      expect(kamwangi.parameter(0)).to eq [20, 21]
-    end
-  end
+  #   it 'sorts values from lowest to highest' do
+  #     expect(kamwangi.parameter(0)).to eq [20, 21]
+  #   end
+  # end
 
-  describe 'summarise_recipe' do
-    before(:each) do
-      kamwangi.recipes << [21, 50, 26, 8.5, 20.5]
-      kamwangi.recipes << [20, 55, 27, 9, 21.5]
-      kamwangi.recipes << [20.5, 52, 26, 8.7, 21]
-    end
+  # describe 'summarise_recipe' do
+  #   before(:each) do
+  #     kamwangi.recipes << [21, 50, 26, 8.5, 20.5]
+  #     kamwangi.recipes << [20, 55, 27, 9, 21.5]
+  #     kamwangi.recipes << [20.5, 52, 26, 8.7, 21]
+  #   end
 
-    it 'converts recipe values into Strings' do
-      expect(kamwangi.summarise_recipe[0]).to be_a(String)
-    end
+  #   it 'converts recipe values into Strings' do
+  #     expect(kamwangi.summarise_recipe[0]).to be_a(String)
+  #   end
 
-    it 'returns one string per recipe parameter' do
-      expect(kamwangi.summarise_recipe.length).to eq kamwangi.recipes[0].length
-    end
+  #   it 'returns one string per recipe parameter' do
+  #     expect(kamwangi.summarise_recipe.length).to eq kamwangi.recipes[0].length
+  #   end
 
-    it 'returns the minimum and maximum value for each recipe parameter' do
-      expect(kamwangi.summarise_recipe[0]).to include '20', '21'
-    end
+  #   it 'returns the minimum and maximum value for each recipe parameter' do
+  #     expect(kamwangi.summarise_recipe[0]).to include '20', '21'
+  #   end
 
-    it 'does not return other values for that parameter' do
-      expect(kamwangi.summarise_recipe[0]).not_to include '20.5'
-    end
+  #   it 'does not return other values for that parameter' do
+  #     expect(kamwangi.summarise_recipe[0]).not_to include '20.5'
+  #   end
 
-    it 'returns a parameter label alongside the min/max values' do
-      expect(kamwangi.summarise_recipe[1]).to include 'Yield:'
-    end
-  end
+  #   it 'returns a parameter label alongside the min/max values' do
+  #     expect(kamwangi.summarise_recipe[1]).to include 'Yield:'
+  #   end
+  # end
 
   describe 'summarise_name' do
     it 'returns the origin and name of a coffee' do

@@ -1,4 +1,5 @@
 require_relative './recipes'
+require_relative './summaries'
 
 # This class does most of the heavy lifting for the app; substituting as a database to allow the storing, sorting, and
 # manipulation of information about different coffees. Some of this functionality is provided through modules, used to
