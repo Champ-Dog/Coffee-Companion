@@ -91,11 +91,11 @@ describe Coffee do
 
   describe 'summarise_name' do
     it 'returns the origin and name of a coffee' do
-      expect(kamwangi.summarise_name).to include 'Kamwangi', 'Kenya'
+      expect(kamwangi.summarise_bean).to include 'Kamwangi', 'Kenya'
     end
 
     it 'displays both in a single line, ordered as origin/name' do
-      expect(kamwangi.summarise_name).to eq 'Kenya Kamwangi'
+      expect(kamwangi.summarise_bean).to eq 'Kenya Kamwangi'
     end
   end
 

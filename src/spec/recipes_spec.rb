@@ -22,7 +22,7 @@ describe Recipes do
     end
   end
 
-  describe 'summarise_recipe' do
+  describe 'recipe_summary' do
     before(:each) do
       kamwangi.recipes << [21, 50, 26, 8.5, 20.5]
       kamwangi.recipes << [20, 55, 27, 9, 21.5]
@@ -30,23 +30,23 @@ describe Recipes do
     end
 
     it 'converts recipe values into Strings' do
-      expect(kamwangi.summarise_recipe[0]).to be_a(String)
+      expect(kamwangi.recipe_summary[0]).to be_a(String)
     end
 
     it 'returns one string per recipe parameter' do
-      expect(kamwangi.summarise_recipe.length).to eq kamwangi.recipes[0].length
+      expect(kamwangi.recipe_summary.length).to eq kamwangi.recipes[0].length
     end
 
     it 'returns the minimum and maximum value for each recipe parameter' do
-      expect(kamwangi.summarise_recipe[0]).to include '20', '21'
+      expect(kamwangi.recipe_summary[0]).to include '20', '21'
     end
 
     it 'does not return other values for that parameter' do
-      expect(kamwangi.summarise_recipe[0]).not_to include '20.5'
+      expect(kamwangi.recipe_summary[0]).not_to include '20.5'
     end
 
     it 'returns a parameter label alongside the min/max values' do
-      expect(kamwangi.summarise_recipe[1]).to include 'Yield:'
+      expect(kamwangi.recipe_summary[1]).to include 'Yield:'
     end
   end
 end

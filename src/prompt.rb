@@ -163,7 +163,7 @@ def output(coffee)
   puts coffee.summarise_name
   puts ''
   puts "Recipe:"
-  coffee.summarise_recipe.each do |index|
+  coffee.recipe_summary.each do |index|
     puts "#{index}"
   end
   puts ''

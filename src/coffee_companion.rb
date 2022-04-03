@@ -83,7 +83,7 @@ until welcome == 'Exit'
       selection = prompt.ask("Please enter a selection (1/2/etc)", convert: :int)
       selected_object = results[selection - 1]
       system "clear"
-      summarise(selected_object)
+      selected_object.summarise
       include Manipulate
       run_manipulate(selected_object)
 

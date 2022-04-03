@@ -3,10 +3,6 @@ require './coffee'
 require './prompt'
 require 'tty-file'
 
-
-
-
-
 kamwangi = Coffee.new('kenya', 'kamwangi')
 # # p kamwangi
 
@@ -19,156 +15,163 @@ kamwangi.minimise <<  "quinine, orange rind, burnt butter, pastry"
 kamwangi.tactile << "creamy, effervescent"
 kamwangi.highlight << ["grapefruit, orange, raspberry"]
 
-p kamwangi.highlight
+# p kamwangi.highlight
 
 
 puts kamwangi.summarise_recipe
+puts kamwangi.summarise_cupping
+p kamwangi.summarise_recipe
 
-puts kamwangi.summarise_name
+file = File.open("report.txt", "a")
+file.puts kamwangi.summarise_recipe
+file.puts kamwangi.summarise_cupping
+file.close
 
-puts kamwangi
+# puts kamwangi.summarise_name
 
-def kam_sum(coffee)
-coffee.summarise_recipe.each do |index|
-    puts "#{index}"
-    puts ""
-  end
-end
-# p kamwangi.recipes
+# puts kamwangi
 
-puts summarise(kamwangi)
-
-puts "this here"
-puts kamwangi.summarise_recipe
-
-def test_method(coffee)
-    return coffee.highlight.flatten.to_s
-end
-
-def print_highlight(coffee)
-    coffee.highlight.flatten!
-    index = 0
-    while index < (coffee.highlight.length - 1) do
-        print "#{coffee.highlight[index]}, "
-        index += 1
-    end
-    print "#{coffee.highlight[-1]}"
-end
-
-puts print_highlight(kamwangi)
-
-def output_highlight(coffee)
-    file = File.open("summaries.txt", "a")
-    coffee.highlight.flatten!
-    (coffee.highlight.length - 1).times do |index|
-        file.print "#{coffee.highlight[index]}, "
-    end
-    file.print "#{coffee.highlight[-1]}"
-    file.close
-end
-
-# puts output_highlight(kamwangi)
-
-# 5.times do |index|
-#       all_parameters << parameter(index)
-#     end
-
-def summary_to_file(coffee)
-    file = File.open("summaries.txt", "a")
-
-    file.puts coffee.summarise_name
-    file.puts ''
-    file.puts "Recipe:"
-    file.puts coffee.summarise_recipe
-    file.puts ''
-    file.puts "Highlight:"
-
-    file.puts ''
-    file.puts ''
-    file.puts "Minimise:"
-    file.puts coffee.minimise
-    file.puts ''
-    file.puts "Tactile:"
-    file.puts coffee.tactile
-
-    file.close
-end
-
-puts "from here"
-
-decaf = Coffee.new('Colombia', 'La Serrania')
-test_coffee = Coffee.new('test', 'test')
-
-pp Coffee.list
-kamwangi.self_destruct
-pp Coffee.list
-
-pp kamwangi
-puts "now"
-puts ""
-pp Coffee.list
-
-# summary_to_file(kamwangi)
-
-# file = File.open("summaries.txt", "a")
-# file.puts "Highlight:"
-# output_highlight(kamwangi)
-# file.close
-# # TTY::File.create_file "./kamwangi.txt"
-# TTY::File.append_to_file("kamwangi.txt") do
-#   "#{kamwangi.summarise_name}
-  
-#   Recipe:
-#   #{kam_sum(kamwangi)}
-  
-#   Highlight:
-#   #{kamwangi.highlight}
- 
-#   Minimise
-#   #{kamwangi.minimise}
-  
-#   Tactile:
-#   #{kamwangi.tactile}
-#   "
-# end
-
-# def summarise(coffee) 
-#   all_parameters = []
-#   5.times do |index|
-#     all_parameters << coffee.parameter(index)
-#   end
-
-#   headings = %w[Dose Yield Time TDS EXT]
-#   headings.zip(all_parameters).each do |index, value|
-#     puts "#{index}: #{value[0]} - #{value[-1]}"
+# def kam_sum(coffee)
+# coffee.summarise_recipe.each do |index|
+#     puts "#{index}"
+#     puts ""
 #   end
 # end
-
-# summarise(kamwangi)
-
-# kamwangi.highlight << 'other good thing, niceness'
 # # p kamwangi.recipes
 
-# # x = Oj.load_file('./coffees.json')
+# puts summarise(kamwangi)
 
-# # x.each do |coffee|
-# #     coffee = Coffee.new(coffee.origin, coffee.name, coffee.highlight.flatten, coffee.minimise.flatten, coffee.tactile.flatten, coffee.recipes)
+# puts "this here"
+# puts kamwangi.summarise_recipe
+
+# def test_method(coffee)
+#     return coffee.highlight.flatten.to_s
+# end
+
+# def print_highlight(coffee)
+#     coffee.highlight.flatten!
+#     index = 0
+#     while index < (coffee.highlight.length - 1) do
+#         print "#{coffee.highlight[index]}, "
+#         index += 1
+#     end
+#     print "#{coffee.highlight[-1]}"
+# end
+
+# puts print_highlight(kamwangi)
+
+# def output_highlight(coffee)
+#     file = File.open("summaries.txt", "a")
+#     coffee.highlight.flatten!
+#     (coffee.highlight.length - 1).times do |index|
+#         file.print "#{coffee.highlight[index]}, "
+#     end
+#     file.print "#{coffee.highlight[-1]}"
+#     file.close
+# end
+
+# # puts output_highlight(kamwangi)
+
+# # 5.times do |index|
+# #       all_parameters << parameter(index)
+# #     end
+
+# def summary_to_file(coffee)
+#     file = File.open("summaries.txt", "a")
+
+#     file.puts coffee.summarise_name
+#     file.puts ''
+#     file.puts "Recipe:"
+#     file.puts coffee.summarise_recipe
+#     file.puts ''
+#     file.puts "Highlight:"
+
+#     file.puts ''
+#     file.puts ''
+#     file.puts "Minimise:"
+#     file.puts coffee.minimise
+#     file.puts ''
+#     file.puts "Tactile:"
+#     file.puts coffee.tactile
+
+#     file.close
+# end
+
+# puts "from here"
+
+# decaf = Coffee.new('Colombia', 'La Serrania')
+# test_coffee = Coffee.new('test', 'test')
+
+# pp Coffee.list
+# kamwangi.self_destruct
+# pp Coffee.list
+
+# pp kamwangi
+# puts "now"
+# puts ""
+# pp Coffee.list
+
+# # summary_to_file(kamwangi)
+
+# # file = File.open("summaries.txt", "a")
+# # file.puts "Highlight:"
+# # output_highlight(kamwangi)
+# # file.close
+# # # TTY::File.create_file "./kamwangi.txt"
+# # TTY::File.append_to_file("kamwangi.txt") do
+# #   "#{kamwangi.summarise_name}
+  
+# #   Recipe:
+# #   #{kam_sum(kamwangi)}
+  
+# #   Highlight:
+# #   #{kamwangi.highlight}
+ 
+# #   Minimise
+# #   #{kamwangi.minimise}
+  
+# #   Tactile:
+# #   #{kamwangi.tactile}
+# #   "
 # # end
 
-# # Coffee.list.each do |coffee|
-# #     coffee.highlight.flatten!
-# #     coffee.minimise.flatten!
-# #     coffee.tactile.flatten!
-# #     coffee.recipes.flatten!
+# # def summarise(coffee) 
+# #   all_parameters = []
+# #   5.times do |index|
+# #     all_parameters << coffee.parameter(index)
+# #   end
+
+# #   headings = %w[Dose Yield Time TDS EXT]
+# #   headings.zip(all_parameters).each do |index, value|
+# #     puts "#{index}: #{value[0]} - #{value[-1]}"
+# #   end
 # # end
 
-# p Coffee.list
+# # summarise(kamwangi)
+
+# # kamwangi.highlight << 'other good thing, niceness'
+# # # p kamwangi.recipes
+
+# # # x = Oj.load_file('./coffees.json')
+
+# # # x.each do |coffee|
+# # #     coffee = Coffee.new(coffee.origin, coffee.name, coffee.highlight.flatten, coffee.minimise.flatten, coffee.tactile.flatten, coffee.recipes)
+# # # end
+
+# # # Coffee.list.each do |coffee|
+# # #     coffee.highlight.flatten!
+# # #     coffee.minimise.flatten!
+# # #     coffee.tactile.flatten!
+# # #     coffee.recipes.flatten!
+# # # end
+
+# # p Coffee.list
 
 
 
-# # def Coffee Reader
-# puts "#{kamwangi.origin} #{kamwangi.name}"
-# puts ''
+# # # def Coffee Reader
+# # puts "#{kamwangi.origin} #{kamwangi.name}"
+# # puts ''
 # puts "Highlight:"
 # puts kamwangi.highlight
 # puts ''
