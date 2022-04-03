@@ -1,4 +1,4 @@
-require_relative '../edit-test'
+# git log
 
 # describe 'attribute_selector' do
 #     let(:kamwangi) { Coffee.new('kenya', 'kamwangi') }

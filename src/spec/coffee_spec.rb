@@ -107,6 +107,10 @@ describe Coffee do
     it 'removes object from @@coffees array' do
       expect(Coffee.list).not_to include kamwangi
     end
+
+    it 'does not remove other objects' do
+      expect(Coffee.list).to include decaf
+    end
   end
 
 end
