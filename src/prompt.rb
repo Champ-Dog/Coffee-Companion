@@ -7,6 +7,8 @@ require 'tty-file'
 #   q.modify :strip, :collapse
 # end
 
+include Calculators
+
 #   x = Coffee.new("#{result[:origin]}", "#{result[:name]}") - THIS NEEDS TO BE ELSEWHERE TO MODULARISE METHODS
 def create
   prompt = TTY::Prompt.new
@@ -47,11 +49,11 @@ def cupping_notes
   return flavour
 end
 
-def calculate_extraction(dose, out, tds)
-  solids = (tds / 100) * out
-  ext = solids / dose
-  return (ext * 100).round(2)
-end
+# def calculate_extraction(dose, out, tds)
+#   solids = (tds / 100) * out
+#   ext = solids / dose
+#   return (ext * 100).round(2)
+# end
 
 # CHANGE CONVERSION ERROR MESSAGES
 # REMOVE EXTRACTION DISPLAY AND EXPLAIN IT'S INCLUDED
@@ -136,26 +138,26 @@ end
 #   end
 # end
 
-def summarise(coffee)
-  puts coffee.summarise_name
-  puts ''
-  puts "Recipe Summary:"
-  coffee.summarise_recipe.each do |index|
-    puts "#{index}"
-  end
-  puts ''
-  puts "Highlight:"
-  puts coffee.highlight
-  puts ''
-  puts "Minimise:"
-  puts coffee.minimise
-  puts ''
-  puts "Tactile:"
-  puts coffee.tactile
-  puts ''
-  puts "Recipes:"
-  puts coffee.recipes
-end
+# def summarise(coffee)
+#   puts coffee.summarise_name
+#   puts ''
+#   puts "Recipe Summary:"
+#   coffee.summarise_recipe.each do |index|
+#     puts "#{index}"
+#   end
+#   puts ''
+#   puts "Highlight:"
+#   puts coffee.highlight
+#   puts ''
+#   puts "Minimise:"
+#   puts coffee.minimise
+#   puts ''
+#   puts "Tactile:"
+#   puts coffee.tactile
+#   puts ''
+#   puts "Recipes:"
+#   puts coffee.recipes
+# end
 
 def output(coffee)
   puts coffee.summarise_name

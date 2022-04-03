@@ -3,14 +3,17 @@ require 'json'
 require "tty-prompt"
 require_relative './prompt'
 require 'oj'
+require_relative './manipulate.rb'
 
-# App start + welcome
+
+
+# Call tty-prompt for main loop + clear screen.
 
 prompt = TTY::Prompt.new
 system "clear"
 
 # Rebuilds coffees from coffees.json - flattening is required to avoid multi-dimensional arrays.
-# Importantly, @recipes needs to have depth set to one on flatten, as seperate recipes need to remain as seperate arrays.
+# Importantly, @recipes needs to have depth set to one on flatten, as seperate recipes need seperate arrays.
 
 stored_coffees = Oj.load_file('./coffees.json')
 stored_coffees.each do |coffee|
@@ -19,8 +22,6 @@ stored_coffees.each do |coffee|
   rebuilt_coffee.minimise << coffee.minimise
   rebuilt_coffee.tactile << coffee.tactile
   rebuilt_coffee.recipes << coffee.recipes
-  # p coffee.recipes
-  # p rebuilt_coffee.recipes
 end
 Coffee.list.each do |coffee|
     coffee.highlight.flatten!
@@ -28,41 +29,39 @@ Coffee.list.each do |coffee|
     coffee.tactile.flatten!
     coffee.recipes.flatten!(1)
 end
-p Coffee.list
+
+# App start + welcome
 
 puts "Welcome to the Coffee Companion"
 
-# Menu to navigate the app, and execute the correct methods based on user choice
+# Main program loop
+# Note that throughout the app style-guide suggestions must be ignored for tty-prompt to function.
 
-welcome = prompt.select("What would you like to do?", %w(Create Edit Search Exit)) #style recommondation ignored for proper gem function
+welcome = prompt.select("What would you like to do?", %w(Create Edit Search Exit)) 
 until welcome == 'Exit'
+  system "clear"
   case welcome
   when 'Create'
-    # Create an array to hold user inputs when making new coffee
-    # new_coffee = []
     new_coffee = create
-    # p new_coffee
     new_coffee.flatten!
     build_coffee = Coffee.new("#{new_coffee[0]}", "#{new_coffee[1]}")
     add_more = prompt.select("Would you like to add more information?", %w(Cupping-Notes Recipe No))
-    case add_more 
+    case add_more
     when 'Cupping-Notes'
       new_coffee << cupping_notes
       new_coffee.flatten!
       build_coffee.highlight << new_coffee[2]
       build_coffee.minimise << new_coffee[3]
       build_coffee.tactile << new_coffee[4]
-      puts 'New record created!'
     when 'Recipe'
-      # new_coffee = recipe
       build_coffee.recipes << recipe
-      puts 'New record created!'
     when 'No'
-      puts 'New record created!'
       p build_coffee
       p Coffee.list
     end
+    puts 'New record created!'
     welcome = prompt.select("What would you like to do?", %w(Create Edit Search Exit))
+  
   when 'Search'
     type = search_type
     term = search_term
@@ -83,7 +82,12 @@ until welcome == 'Exit'
       end
       selection = prompt.ask("Please enter a selection (1/2/etc)", convert: :int)
       selected_object = results[selection - 1]
+      system "clear"
       summarise(selected_object)
+      include Manipulate
+      run_manipulate(selected_object)
+
+
     end
     welcome = prompt.select("What would you like to do?", %w(Create Edit Search Exit))
   when 'Exit'
