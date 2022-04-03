@@ -99,5 +99,14 @@ describe Coffee do
     end
   end
 
+  describe 'self_destruct' do
+    before(:each) do
+      kamwangi.self_destruct
+    end
+
+    it 'removes object from @@coffees array' do
+      expect(Coffee.list).not_to include kamwangi
+    end
+  end
 
 end

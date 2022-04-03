@@ -52,6 +52,11 @@ class Coffee
     return output
   end
 
+  def self_destruct
+    Coffee.list.delete(self)
+    puts "Coffee will be deleted when app closes"
+  end
+
   # def parameters
   #   parameters = []
   #   5.times do |index|

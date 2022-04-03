@@ -94,12 +94,26 @@ def summary_to_file(coffee)
     file.close
 end
 
-summary_to_file(kamwangi)
+puts "from here"
 
-file = File.open("summaries.txt", "a")
-file.puts "Highlight:"
-output_highlight(kamwangi)
-file.close
+decaf = Coffee.new('Colombia', 'La Serrania')
+test_coffee = Coffee.new('test', 'test')
+
+pp Coffee.list
+kamwangi.self_destruct
+pp Coffee.list
+
+pp kamwangi
+puts "now"
+puts ""
+pp Coffee.list
+
+# summary_to_file(kamwangi)
+
+# file = File.open("summaries.txt", "a")
+# file.puts "Highlight:"
+# output_highlight(kamwangi)
+# file.close
 # # TTY::File.create_file "./kamwangi.txt"
 # TTY::File.append_to_file("kamwangi.txt") do
 #   "#{kamwangi.summarise_name}

@@ -4,6 +4,8 @@ require './prompt'
 require 'tty-file'
 
 kamwangi = Coffee.new('kenya', 'kamwangi')
+kamwangi = Coffee.new('kenya', 'kamwangi')
+kamwangi = Coffee.new('kenya', 'kamwangi')
 # # p kamwangi
 
 kamwangi.recipes << [21.0, 50, 26, 8.5, 20.5]
@@ -36,7 +38,7 @@ def recipe_hash(coffee)
   return recipe_hash
 end
 
-p recipe_hash(kamwangi)
+# p recipe_hash(kamwangi)
 # choices =  recipe_hash(kamwangi)
 
 def select_recipe(choices)
@@ -67,15 +69,23 @@ def attribute_selector(coffee)
   when 'Recipes'
     choices = recipe_hash(coffee)
     recipe_to_change = select_recipe(choices) 
-    coffee.recipes[recipe_to_change - 1] = attribute_changer
+    coffee.recipes[recipe_to_change - 1] = recipe
   when 'Cancel'
     puts 'Cancelled'
   end
 end
   
 
-attribute_selector(kamwangi)
-p kamwangi
+def delete_coffee(coffee)
+  Coffee.list.delete(coffee)
+end
+
+delete_coffee(kamwangi)
+
+p Coffee.list
+
+# attribute_selector(kamwangi)
+# p kamwangi
 
 # recipe_changer(kamwangi)
 

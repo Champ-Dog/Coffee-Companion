@@ -54,12 +54,15 @@ def calculate_extraction(dose, out, tds)
 end
 
 # CHANGE CONVERSION ERROR MESSAGES
+# REMOVE EXTRACTION DISPLAY AND EXPLAIN IT'S INCLUDED
+# RETURN RESULT INSTEAD OF NEW VARIABLE
+# WITH BOTH CHANGES ABC ACCEPTABLE
 def recipe
   prompt = TTY::Prompt.new
   result = prompt.collect do
     key(:dose).ask('Dose:', convert: :float)
     key(:yield).ask('Yield:', convert: :float)
-    key(:time).ask('Time:', convert: :float)
+    key(:time).ask('Time:', convert: :integer)
     key(:tds).ask('TDS:', convert: :float)
   end
   result[:ext] = calculate_extraction(result[:dose], result[:yield], result[:tds])
