@@ -112,5 +112,4 @@ describe Coffee do
       expect(Coffee.list).to include decaf
     end
   end
-
 end

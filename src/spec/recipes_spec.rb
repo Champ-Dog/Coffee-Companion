@@ -3,18 +3,22 @@ require_relative '../recipes'
 describe Recipes do
   let(:kamwangi) { Coffee.new('kenya', 'kamwangi') }
 
+  before(:each) do
+      kamwangi.recipes << [21, 50, 26, 8.5, 20.5]
+      kamwangi.recipes << [20, 55, 27, 9, 21.5]
+  end
+
   it 'allows Coffee class objects to store recipes' do
-    expect(kamwangi.recipes).to eq []
+    expect(kamwangi.recipes).not_to be nil
+  end
+
+  it 'stores all recipes as separate arrays' do
+    expect(kamwangi.recipes.length).to eq 2
   end
 
   describe 'recipe_values' do
-    before(:each) do
-      kamwangi.recipes << [21, 50, 26, 8.5, 20.5]
-      kamwangi.recipes << [20, 55, 27, 9, 21.5]
-    end
-
     it 'returns all values at index [n] from @recipe arrays' do
-      expect(kamwangi.recipe_values(0)).to contain_exactly 21, 20
+      expect(kamwangi.recipe_values(0).length).to eq 2
     end
 
     it 'sorts values from lowest to highest' do
@@ -22,10 +26,18 @@ describe Recipes do
     end
   end
 
+  describe 'recipe_grouper' do
+    it 'calls recipe_values 5 times - once for each recipe parameter (e.g., Dose, Yield, etc)' do
+      expect(kamwangi.recipe_grouper.length).to eq 5
+    end
+
+    it 'returns an array containing the output' do
+      expect(kamwangi.recipe_grouper).to be_a(Array)
+    end
+  end
+
   describe 'recipe_summary' do
     before(:each) do
-      kamwangi.recipes << [21, 50, 26, 8.5, 20.5]
-      kamwangi.recipes << [20, 55, 27, 9, 21.5]
       kamwangi.recipes << [20.5, 52, 26, 8.7, 21]
     end
 
