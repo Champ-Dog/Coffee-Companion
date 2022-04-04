@@ -100,7 +100,8 @@ describe Coffee do
   # end
 
   describe 'self_destruct' do
-    before(:each) do 
+    before(:each) do
+      kamwangi.self_destruct
     end
 
     it 'removes object from @@coffees array' do
