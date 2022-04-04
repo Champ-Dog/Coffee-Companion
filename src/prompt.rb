@@ -10,14 +10,14 @@ require 'tty-file'
 include Calculators
 
 #   x = Coffee.new("#{result[:origin]}", "#{result[:name]}") - THIS NEEDS TO BE ELSEWHERE TO MODULARISE METHODS
-def create
-  prompt = TTY::Prompt.new
-  result = prompt.collect do
-    key(:origin).ask('Origin:', required: true, modify: :capitalize)
-    key(:name).ask('Name:', required: true, modify: :capitalize)
-  end
-  return result[:origin], result[:name]
-end
+# def create
+#   prompt = TTY::Prompt.new
+#   result = prompt.collect do
+#     key(:origin).ask('Origin:', required: true, modify: :capitalize)
+#     key(:name).ask('Name:', required: true, modify: :capitalize)
+#   end
+#   return result[:origin], result[:name]
+# end
 
 # Defined here to be re-used in search/edit features
 # def add_more
@@ -59,19 +59,21 @@ end
 # REMOVE EXTRACTION DISPLAY AND EXPLAIN IT'S INCLUDED
 # RETURN RESULT INSTEAD OF NEW VARIABLE
 # WITH BOTH CHANGES ABC ACCEPTABLE
-def recipe
-  prompt = TTY::Prompt.new
-  result = prompt.collect do
-    key(:dose).ask('Dose:', convert: :float)
-    key(:yield).ask('Yield:', convert: :float)
-    key(:time).ask('Time:', convert: :integer)
-    key(:tds).ask('TDS:', convert: :float)
-  end
-  result[:ext] = calculate_extraction(result[:dose], result[:yield], result[:tds])
-  puts "Your extraction is #{result[:ext]}"
-  new_recipe = [result[:dose], result[:yield], result[:time], result[:tds], result[:ext]]
-  return new_recipe
-end
+# def recipe
+#   prompt = TTY::Prompt.new
+#   result = prompt.collect do
+#     key(:dose).ask('Dose:', convert: :float)
+#     key(:yield).ask('Yield:', convert: :float)
+#     key(:time).ask('Time:', convert: :integer)
+#     key(:tds).ask('TDS:', convert: :float)
+#   end
+#   return [result[:dose], result[:yield], result[:time], result[:tds]]
+# end
+  # Below should be seperate method
+# def getextract(1, 2, 3)
+#   result[:ext] = return_extraction(result[:dose], result[:yield], result[:tds])
+#   return [result[:dose], result[:yield], result[:time], result[:tds], result[:ext]]
+# end
 
 # Methods used for searching stored Coffee objects
 
@@ -159,23 +161,23 @@ end
 #   puts coffee.recipes
 # end
 
-def output(coffee)
-  puts coffee.summarise_name
-  puts ''
-  puts "Recipe:"
-  coffee.recipe_summary.each do |index|
-    puts "#{index}"
-  end
-  puts ''
-  puts "Highlight:"
-  puts coffee.highlight
-  puts ''
-  puts "Minimise:"
-  puts coffee.minimise[0]
-  puts ''
-  puts "Tactile:"
-  puts coffee.tactile[0]
-end
+# def output(coffee)
+#   puts coffee.summarise_name
+#   puts ''
+#   puts "Recipe:"
+#   coffee.recipe_summary.each do |index|
+#     puts "#{index}"
+#   end
+#   puts ''
+#   puts "Highlight:"
+#   puts coffee.highlight
+#   puts ''
+#   puts "Minimise:"
+#   puts coffee.minimise[0]
+#   puts ''
+#   puts "Tactile:"
+#   puts coffee.tactile[0]
+# end
 
 #   prompt = TTY::Prompt.new
 #   search_by = prompt.select("How would you like to search?", %w(Origin Name))

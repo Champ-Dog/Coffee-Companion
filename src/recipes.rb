@@ -29,7 +29,7 @@ module Recipes
   def recipe_grouper
     all_parameters = []
     5.times do |index|
-        all_parameters << recipe_values(index)
+      all_parameters << recipe_values(index)
     end
     return all_parameters
   end

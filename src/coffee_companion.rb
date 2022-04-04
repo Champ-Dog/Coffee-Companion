@@ -54,7 +54,12 @@ until welcome == 'Exit'
       build_coffee.minimise << new_coffee[3]
       build_coffee.tactile << new_coffee[4]
     when 'Recipe'
-      build_coffee.recipes << recipe
+      build_recipe = []
+      build_recipe << recipe
+      build_recipe.flatten!
+      build_recipe << Calculators.return_extraction(build_recipe[0], build_recipe[1], build_recipe[3])
+      build_coffee.recipes << build_recipe.flatten
+      # build_coffee.recipes << recipe
     when 'No'
       p build_coffee
       p Coffee.list
@@ -87,8 +92,7 @@ until welcome == 'Exit'
       selected_object.recipes.each do |recipe|
         print recipe
       end
-      include Manipulate
-      run_manipulate(selected_object)
+      Manipulate.run_manipulate(selected_object)
 
 
     end
