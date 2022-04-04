@@ -16,4 +16,32 @@ describe Summaries do
       expect(kamwangi.summarise_bean).to eq 'KENYA KAMWANGI'
     end
   end
+
+  describe 'summarise_recipe' do
+    it 'returns an array of strings for display/export' do
+      expect(kamwangi.summarise_recipe[1]).to be_a(String)
+    end
+
+    it 'includes a heading at the start of the array' do
+      expect(kamwangi.summarise_recipe[0]). to eq "Recipe Summary:"
+    end
+
+    it 'populates the array with the output of recipe_summary' do
+      expect(kamwangi.summarise_recipe.length).to eq 6
+    end
+  end
+
+  describe 'summarise_notes' do
+    it 'returns an array of strings for display/export' do
+      expect(kamwangi.summarise_notes[1]).to be_a(String)
+    end
+
+    it 'returns the stored values of @highlight, @minimise, and @tactile, in seperate arrays' do
+      expect(kamwangi.summarise_notes.length).to eq 3
+    end
+
+    it 'flattens the stored values of @highlight, @minimise, and @tactile for better display' do
+      expect(kamwangi.summarise_notes[1]).not_to be_a(Array)
+    end
+  end
 end

@@ -40,7 +40,7 @@ describe Coffee do
     expect(Coffee.list.length).to eq 2
   end
 
-  describe Coffee.list do
+  describe 'Coffee.list' do
     it 'returns array of all Coffee class objects' do
       expect(Coffee.list).to include(kamwangi, decaf)
     end
