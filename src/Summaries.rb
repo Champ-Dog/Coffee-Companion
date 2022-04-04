@@ -19,7 +19,7 @@ module Summaries
   end
 
   # This method gathers stored cupping notes together to pass to the 'summarise_cupping' method before display/export
-  def summarise_notes
+  def summarise_descriptors
     notes = []
     notes << @highlight.flatten.join(' ')
     notes << @minimise.flatten.join(' ')
@@ -32,7 +32,7 @@ module Summaries
   def summarise_cupping
     headings = %w[Highlight Minimise Tactile]
     output = []
-    headings.zip(summarise_notes).each do |index, descriptors|
+    headings.zip(summarise_descriptors).each do |index, descriptors|
       output << ''
       output << index
       output << descriptors

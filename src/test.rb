@@ -1,6 +1,6 @@
 # require 'oj'
 require './coffee'
-# require './prompt'
+require './prompt'
 require "tty-prompt"
 require './create'
 # require 'tty-file'
@@ -20,28 +20,51 @@ kamwangi.recipes << [20.5, 53, 29, 9, 22]
 
 # # p kamwangi.highlight
 
-coffee.recipe_hash
+# coffee.recipe_hash
 
-hash
-prompt select
-prompt values
-push new value
+# hash
+# prompt select
+# prompt values
+# push new value
 
-def recipe_hash(coffee)
-    hash = {}
-    x = 1
-    coffee.recipes.each do |recipe|
-        hash[:"#{recipe}"] = x
-        x += 1
-    end
-    return hash
-end
+# def recipe_hash(coffee)
+#     hash = {}
+#     x = 1
+#     coffee.recipes.each do |recipe|
+#         hash[:"#{recipe}"] = x
+#         x += 1
+#     end
+#     return hash
+# end
 
 prompt = TTY::Prompt.new
-choices = recipe_hash(kamwangi)
-selected = prompt.select("Which recipe would you like to edit", choices)
-kamwangi.recipes[selected - 1] = Create.build_recipe(kamwangi)
-p kamwangi.recipes
+# choices = recipe_hash(kamwangi)
+# selected = prompt.select("Which recipe would you like to edit", choices)
+# kamwangi.recipes[selected - 1] = Create.build_recipe(kamwangi)
+# p kamwangi.recipes
+
+def add_descriptors(coffee)
+  new_descriptors = cupping_notes
+  new_descriptors.flatten!
+  coffee.highlight << new_descriptors[0]
+  coffee.minimise << new_descriptors[1]
+  coffee.tactile << new_descriptors[2]
+end
+
+# def self.edit_descriptors(coffee)
+#   edit_add = prompt.select("What would you like to do?", %w(Add_New Change_Existing Cancel))
+#   case edit_add
+#   when 'Add_New'
+#     Create.add_descriptors(coffee)
+#   when 'Change_Existing'
+#     update = []
+#     update << cupping_notes
+#     update.flatten!
+#     Manipulate.descriptor_changer(update, coffee)
+#   end
+end
+
+p kamwangi
 
 # file = File.open("report.txt", "a")
 # file.puts "Test Starts Here"

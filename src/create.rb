@@ -1,6 +1,6 @@
 require 'tty-prompt'
 
-# This module contains the methods and control structures used when creating a new Coffee-class object.
+# This module contains the helper methods and flow control structures used when creating a new Coffee-class object.
 module Create
   # This method is used to obtain user input to create a new coffee
   def self.prompt_bean
@@ -24,6 +24,7 @@ module Create
     return [result[:dose], result[:yield], result[:time], result[:tds]]
   end
 
+  # Creates a new recipe
   def self.build_recipe
     build_recipe = []
     build_recipe << Create.prompt_recipe
@@ -32,4 +33,18 @@ module Create
     return build_recipe.flatten
   end
 
+  # Checks for new descriptor(@highlight, @minimise, @tactile) values and updates if present
+  def self.descriptor_changer(new_descriptors, coffee)
+    new_descriptors[0].nil? ? nil : coffee.highlight = [new_descriptors[0]]
+    new_descriptors[1].nil? ? nil : coffee.minimise = [new_descriptors[1]]
+    new_descriptors[2].nil? ? nil : coffee.tactile = [new_descriptors[2]]
+  end
+
+  def self.add_descriptors(coffee)
+    new_descriptors = cupping_notes
+    new_descriptors.flatten!
+    coffee.highlight << new_descriptors[0]
+    coffee.minimise << new_descriptors[1]
+    coffee.tactile << new_descriptors[2]
+  end
 end

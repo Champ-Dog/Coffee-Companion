@@ -43,26 +43,18 @@ until welcome == 'Exit'
   system "clear"
   case welcome
   when 'Create'
-    new_coffee = Create.prompt_bean
-    new_coffee.flatten!
-    build_coffee = Coffee.new("#{new_coffee[0]}", "#{new_coffee[1]}")
+    new_bean = Create.prompt_bean
+    new_bean.flatten!
+    new_coffee = Coffee.new("#{new_bean[0]}", "#{new_bean[1]}")
     add_more = prompt.select("Would you like to add more information?", %w(Cupping-Notes Recipe No))
     case add_more
     when 'Cupping-Notes'
-      new_coffee << cupping_notes
-      new_coffee.flatten!
-      build_coffee.highlight << new_coffee[2]
-      build_coffee.minimise << new_coffee[3]
-      build_coffee.tactile << new_coffee[4]
+      Create.add_descriptors(new_coffee)
     when 'Recipe'
       build_coffee.recipes << Create.build_recipe
-    when 'No'
-      p build_coffee
-      p Coffee.list
     end
     puts 'New record created!'
     welcome = prompt.select("What would you like to do?", %w(Create Search Exit))
-  
   when 'Search'
     type = search_type
     term = search_term
@@ -72,8 +64,6 @@ until welcome == 'Exit'
     when 'Origin'
       results = Coffee.search_origin(term)
     end
-
-    # From results, create list of just names
     if results.empty? == true
       puts "No matches found"
     else
