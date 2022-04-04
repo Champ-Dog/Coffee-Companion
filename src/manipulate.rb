@@ -2,8 +2,8 @@ require "tty-prompt"
 # require_relative './coffee'
 require_relative './prompt'
 
-# This module contains the control structure and methods necessary to edit or export information about a coffee.
-# Selection is handled outside of this module.
+# This module contains the flow control structures and helper methods necessary to edit or export stored information
+# about a coffee.
 module Manipulate
   def self.run_manipulate(coffee)
     prompt = TTY::Prompt.new
@@ -54,10 +54,10 @@ module Manipulate
 
   end
 
-  def self.descriptor_changer(new_descriptor, coffee)
-    (new_descriptor[0]).empty? ? nil : coffee.highlight = new_descriptor[0]
-    (new_descriptor[1]).empty? ? nil : coffee.minimise = new_descriptor[1]
-    (new_descriptor[2]).empty? ? nil : coffee.tactile = new_descriptor[2]
+  def self.descriptor_changer(new_descriptors, coffee)
+    !!new_descriptors[0] ? coffee.highlight = [new_descriptors[0]] : nil
+    !!new_descriptors[1] ? coffee.minimise = [new_descriptors[1]] : nil
+    !!new_descriptors[2] ? coffee.tactile = [new_descriptors[2]] : nil
   end
 
   def self.bean_changer
@@ -68,7 +68,14 @@ module Manipulate
     return new_value
   end
 
-  def self.export_coffee(coffee)
+  def self.recipe_changer(coffee)
+    prompt = TTY::Prompt.new
+    choices = coffee.recipe_hash
+    selected = prompt.select("Which recipe would you like to edit", choices)
+    coffee.recipes[selected - 1] = Create.build_recipe
+  end
+
+  def self.coffee_exporter(coffee)
     file = File.open("report.txt", "a")
     file.puts coffee.summarise
     file.puts ''

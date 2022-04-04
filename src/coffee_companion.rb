@@ -3,7 +3,8 @@ require 'json'
 require "tty-prompt"
 require_relative './prompt'
 require 'oj'
-require_relative './manipulate.rb'
+require_relative './manipulate'
+require_relative './create'
 
 
 
@@ -42,7 +43,7 @@ until welcome == 'Exit'
   system "clear"
   case welcome
   when 'Create'
-    new_coffee = create
+    new_coffee = Create.prompt_bean
     new_coffee.flatten!
     build_coffee = Coffee.new("#{new_coffee[0]}", "#{new_coffee[1]}")
     add_more = prompt.select("Would you like to add more information?", %w(Cupping-Notes Recipe No))
@@ -54,12 +55,7 @@ until welcome == 'Exit'
       build_coffee.minimise << new_coffee[3]
       build_coffee.tactile << new_coffee[4]
     when 'Recipe'
-      build_recipe = []
-      build_recipe << recipe
-      build_recipe.flatten!
-      build_recipe << Calculators.return_extraction(build_recipe[0], build_recipe[1], build_recipe[3])
-      build_coffee.recipes << build_recipe.flatten
-      # build_coffee.recipes << recipe
+      build_coffee.recipes << Create.build_recipe
     when 'No'
       p build_coffee
       p Coffee.list
@@ -92,6 +88,7 @@ until welcome == 'Exit'
       selected_object.recipes.each do |recipe|
         print recipe
       end
+      puts ''
       Manipulate.run_manipulate(selected_object)
 
 

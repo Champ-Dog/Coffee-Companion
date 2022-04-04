@@ -44,4 +44,16 @@ module Recipes
     end
     return output
   end
+  
+  # This method converts @recipes into a hash with recipes as keys and position as values, used to populate a tty-prompt
+  # prompt.select call in Manipulate.recipe_changer.
+  def recipe_hash(coffee)
+    hash = {}
+    x = 1
+    coffee.recipes.each do |recipe|
+        hash[:"#{recipe}"] = x
+        x += 1
+    end
+    return hash
+  end
 end

@@ -2,6 +2,7 @@
 require './coffee'
 # require './prompt'
 require "tty-prompt"
+require './create'
 # require 'tty-file'
 
 kamwangi = Coffee.new('kenya', 'kamwangi')
@@ -19,6 +20,12 @@ kamwangi.recipes << [20.5, 53, 29, 9, 22]
 
 # # p kamwangi.highlight
 
+coffee.recipe_hash
+
+hash
+prompt select
+prompt values
+push new value
 
 def recipe_hash(coffee)
     hash = {}
@@ -32,8 +39,9 @@ end
 
 prompt = TTY::Prompt.new
 choices = recipe_hash(kamwangi)
-selected = prompt.select("Which recipe would you like to change?", choices)
-p selected
+selected = prompt.select("Which recipe would you like to edit", choices)
+kamwangi.recipes[selected - 1] = Create.build_recipe(kamwangi)
+p kamwangi.recipes
 
 # file = File.open("report.txt", "a")
 # file.puts "Test Starts Here"
@@ -319,8 +327,3 @@ p selected
 # # # p Coffee.list
 
 # # # Oj.to_file('./coffees.json', x)
-
-x = [[]]
-y = []
-y << x[1]
-p y
