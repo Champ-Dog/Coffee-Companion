@@ -18,14 +18,21 @@ kamwangi.highlight << ["grapefruit, orange, raspberry"]
 # p kamwangi.highlight
 
 
-puts kamwangi.summarise_recipe
-puts kamwangi.summarise_cupping
-p kamwangi.summarise_recipe
 
 file = File.open("report.txt", "a")
-file.puts kamwangi.summarise_recipe
-file.puts kamwangi.summarise_cupping
+file.puts "Test Starts Here"
+file.puts kamwangi.summarise
 file.close
+
+
+# puts kamwangi.summarise_recipe
+# puts kamwangi.summarise_cupping
+# p kamwangi.summarise_recipe
+
+# file = File.open("report.txt", "a")
+# file.puts kamwangi.summarise_recipe
+# file.puts kamwangi.summarise_cupping
+# file.close
 
 # puts kamwangi.summarise_name
 

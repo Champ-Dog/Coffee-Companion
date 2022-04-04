@@ -14,9 +14,8 @@ module Recipes
     @recipes = []
   end
 
-  # This method groups all values for each @recipe parameter into seperate arrays e.g., an array with each recorded
-  # dose, one with each recorded yield, etc. Refer to 'recipes_spec.rb' for specifics. This information is used in
-  # 'recipe_summary' (below); and is not called elsewhere.
+  # This returns an array containing all values for a given recipe parameter (e.g., Dose) Refer to 'recipes_spec.rb' for
+  # specifics.
   def recipe_values(index)
     values = []
     @recipes.each do |recipe|
@@ -25,17 +24,22 @@ module Recipes
     return values.sort
   end
 
-  # This returns and formats a range (as 'min - max') for each recipe parameter; summarising the collected recipes
-  # of a coffee for easier reporting. Refer to 'recipes_spec.rb' for specifics.
-  def recipe_summary
+  # This calls 'recipe_values' for each parameter of a recipe (i.e., Dose, Yield, Time, TDS, EXT); returning the
+  # combined output as an array to be fed to 'recipe_summary'. Refer to 'recipes_spec.rb' for specifics.
+  def recipe_grouper
     all_parameters = []
     5.times do |index|
         all_parameters << recipe_values(index)
     end
+    return all_parameters
+  end
 
+  # This outputs the minimum and maximum values for each recipe parameter, along with an appropriate label, in the 
+  # format 'parameter: min - max'. Refer to 'recipes_spec.rb' for specifics.
+  def recipe_summary
     headings = %w[Dose Yield Time TDS EXT]
     output = []
-    headings.zip(all_parameters).each do |index, value|
+    headings.zip(recipe_grouper).each do |index, value|
       output << "#{index}: #{value[0]} - #{value[-1]}"
     end
     return output

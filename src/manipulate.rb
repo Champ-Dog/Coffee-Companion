@@ -41,7 +41,7 @@ module Manipulate
         (update[0]).empty? ? next : coffee.highlight = update[0]
         (update[1]).empty? ? next : coffee.minimise = update[1]
         (update[2]).empty? ? next : coffee.tactile = update[2]
-      
+
         edit_this = prompt.select("What would you like to edit?", %w(Origin Name Cupping-Notes Recipes Cancel))
       when 'Recipes'
         choices = recipe_hash(coffee)
@@ -56,16 +56,14 @@ module Manipulate
   def attribute_changer
     prompt = TTY::Prompt.new
     new_value = prompt.ask("Please enter new value") do |input|
-      input.required(true, 'New value is required')
+      input.required(true, 'New value is required to continue, or re-enter previous value')
     end
     return new_value
   end
 
   def export_coffee(coffee)
     file = File.open("report.txt", "a")
-    file.puts coffee.summarise_bean
-    file.puts coffee.summarise_notes
-    file.puts coffee.summarise_cupping
+    file.puts coffee.summarise
     file.puts ''
     file.close
   end

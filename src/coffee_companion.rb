@@ -84,6 +84,9 @@ until welcome == 'Exit'
       selected_object = results[selection - 1]
       system "clear"
       puts selected_object.summarise
+      selected_object.recipes.each do |recipe|
+        print recipe
+      end
       include Manipulate
       run_manipulate(selected_object)
 

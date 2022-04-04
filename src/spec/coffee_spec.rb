@@ -89,19 +89,18 @@ describe Coffee do
   #   end
   # end
 
-  describe 'summarise_name' do
-    it 'returns the origin and name of a coffee' do
-      expect(kamwangi.summarise_bean).to include 'Kamwangi', 'Kenya'
-    end
+  # describe 'summarise_name' do
+  #   it 'returns the origin and name of a coffee' do
+  #     expect(kamwangi.summarise_bean).to include 'Kamwangi', 'Kenya'
+  #   end
 
-    it 'displays both in a single line, ordered as origin/name' do
-      expect(kamwangi.summarise_bean).to eq 'Kenya Kamwangi'
-    end
-  end
+  #   it 'displays both in a single line, ordered as origin/name' do
+  #     expect(kamwangi.summarise_bean).to eq 'Kenya Kamwangi'
+  #   end
+  # end
 
   describe 'self_destruct' do
-    before(:each) do
-      kamwangi.self_destruct
+    before(:each) do 
     end
 
     it 'removes object from @@coffees array' do

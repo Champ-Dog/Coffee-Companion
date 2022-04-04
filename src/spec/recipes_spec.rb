@@ -5,7 +5,7 @@ describe Recipes do
 
   it 'allows Coffee class objects to store recipes' do
     expect(kamwangi.recipes).to eq []
-  end  
+  end
 
   describe 'recipe_values' do
     before(:each) do
