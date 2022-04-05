@@ -33,15 +33,15 @@ describe Summaries do
 
   describe 'summarise_notes' do
     it 'returns an array of strings for display/export' do
-      expect(kamwangi.summarise_notes[1]).to be_a(String)
+      expect(kamwangi.summarise_descriptors[1]).to be_a(String)
     end
 
     it 'returns the stored values of @highlight, @minimise, and @tactile, in seperate arrays' do
-      expect(kamwangi.summarise_notes.length).to eq 3
+      expect(kamwangi.summarise_descriptors.length).to eq 3
     end
 
     it 'flattens the stored values of @highlight, @minimise, and @tactile for better display' do
-      expect(kamwangi.summarise_notes[1]).not_to be_a(Array)
+      expect(kamwangi.summarise_descriptors[1]).not_to be_a(Array)
     end
   end
 end

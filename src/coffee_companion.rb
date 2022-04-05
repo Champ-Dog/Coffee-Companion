@@ -1,7 +1,7 @@
 require_relative './coffee'
 require 'json'
 require "tty-prompt"
-require_relative './prompt'
+require "pastel"
 require 'oj'
 require_relative './manipulate'
 require_relative './create'
@@ -11,6 +11,7 @@ require_relative './create'
 # Call tty-prompt for main loop + clear screen.
 
 prompt = TTY::Prompt.new
+pastel = Pastel.new
 system "clear"
 
 # Rebuilds coffees from coffees.json - flattening is required to avoid multi-dimensional arrays.
@@ -30,34 +31,34 @@ Coffee.list.each do |coffee|
     coffee.tactile.flatten!
     coffee.recipes.flatten!(1)
 end
-
+pastel.blue
 # App start + welcome
 
-puts "Welcome to the Coffee Companion"
+puts pastel.blue("Welcome to the ", pastel.red.underline("Coffee Companion"))
 
 # Main program loop
-# Note that throughout the app style-guide suggestions must be ignored for tty-prompt to function.
+# Note that throughout the app several style guide suggestions must be ignored for tty-prompt to function.
 
-welcome = prompt.select("What would you like to do?", %w(Create Search Exit)) 
+welcome = prompt.select(pastel.blue("What would you like to do?"), %w(Create Search Exit)) 
 until welcome == 'Exit'
   system "clear"
   case welcome
   when 'Create'
     new_bean = Create.prompt_bean
     new_bean.flatten!
-    new_coffee = Coffee.new("#{new_bean[0]}", "#{new_bean[1]}")
-    add_more = prompt.select("Would you like to add more information?", %w(Cupping-Notes Recipe No))
+    new_coffee = Coffee.new(new_bean[0], new_bean[1])
+    add_more = prompt.select(pastel.blue("Would you like to add more information?"), %w(Cupping-Notes Recipe No))
     case add_more
     when 'Cupping-Notes'
       Create.add_descriptors(new_coffee)
     when 'Recipe'
-      build_coffee.recipes << Create.build_recipe
+      new_coffee.recipes << Create.build_recipe
     end
     puts 'New record created!'
-    welcome = prompt.select("What would you like to do?", %w(Create Search Exit))
+    welcome = prompt.select(pastel.blue("What would you like to do?"), %w(Create Search Exit))
   when 'Search'
-    type = search_type
-    term = search_term
+    type = Manipulate.search_type
+    term = Manipulate.search_term
     case type
     when 'Name'
       results = Coffee.search_name(term)
@@ -71,7 +72,7 @@ until welcome == 'Exit'
       results.each.with_index(1) do |match, index|
         puts "#{index}. #{match.name}"
       end
-      selection = prompt.ask("Please enter a selection (1/2/etc)", convert: :int)
+      selection = prompt.ask(pastel.blue("Please enter a selection (1/2/etc)"), convert: :int)
       selected_object = results[selection - 1]
       system "clear"
       puts selected_object.summarise
@@ -80,10 +81,8 @@ until welcome == 'Exit'
       end
       puts ''
       Manipulate.run_manipulate(selected_object)
-
-
     end
-    welcome = prompt.select("What would you like to do?", %w(Create Search Exit))
+    welcome = prompt.select(pastel.blue("What would you like to do?"), %w(Create Search Exit))
   when 'Exit'
     puts 'Goodbye'
   else
@@ -94,21 +93,3 @@ end
 
 save_coffees = Coffee.list
 Oj.to_file('./coffees.json', save_coffees)
-p save_coffees
-# .flatten(1)  - DON'T FLATTEN IN PRODUCTION! NEED CONTENTS SEPARATE TO PRESERVE ATTRIBUTE SEPARATION
-
-# y = JSON.load_file('coffees.json', symbolize_names: true)
-# y << Coffee.to_json
-# p y
-# File.write('coffees.json', JSON.pretty_generate(y))
-
-# parsed = JSON.load_file('coffees.json', symbolize_names: true)
-# puts parsed
-
-# Coffee.list
-
-# p Coffee.list
-
-# parsed << test
-
-# File.write('coffees.json', JSON.pretty_generate(parsed))

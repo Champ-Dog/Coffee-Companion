@@ -48,22 +48,3 @@ module Summaries
     return output
   end
 end
-# def summarise(coffee)
-#   puts coffee.bean_summary
-#   puts ''
-#   puts "Recipe Summary:"
-#   coffee.recipe_summary.each do |index|
-#     puts "#{index}"
-#   end
-#   puts ''
-  # puts "Highlight:"
-  # puts coffee.highlight
-  # puts ''
-  # puts "Minimise:"
-  # puts coffee.minimise
-  # puts ''
-  # puts "Tactile:"
-  # puts coffee.tactile
-  # puts ''
-  # puts "Recipes:"
-  # puts coffee.recipes

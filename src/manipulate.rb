@@ -1,21 +1,23 @@
 require "tty-prompt"
+require "pastel"
+
 # require_relative './coffee'
-require_relative './prompt'
 
 # This module contains the flow control structures and helper methods necessary to edit or export stored information
 # about a coffee.
 module Manipulate
   def self.run_manipulate(coffee)
     prompt = TTY::Prompt.new
-    manipulate_coffee = prompt.select("What would you like to do?", %w(Edit Export Delete Cancel))
+    pastel = Pastel.new
+    manipulate_coffee = prompt.select(pastel.blue("What would you like to do?"), %w(Edit Export Delete Cancel))
     until manipulate_coffee == 'Cancel'
       case manipulate_coffee
       when 'Edit'
         Manipulate.edit_coffee(coffee)
-        manipulate_coffee = prompt.select("What would you like to do?", %w(Edit Export Delete Cancel))
+        manipulate_coffee = prompt.select(pastel.blue("What would you like to do?"), %w(Edit Export Delete Cancel))
       when 'Export'
         export_coffee(coffee)
-        manipulate_coffee = prompt.select("What would you like to do?", %w(Edit Export Delete Cancel))
+        manipulate_coffee = prompt.select(pastel.blue("What would you like to do?"), %w(Edit Export Delete Cancel))
       when 'Delete'
         coffee.self_destruct
         break
@@ -25,18 +27,19 @@ module Manipulate
 
   def self.edit_coffee(coffee)
     prompt = TTY::Prompt.new
-    edit_this = prompt.select("What would you like to edit?", %w(Origin Name Cupping-Notes Recipes Cancel))
+    pastel = Pastel.new
+    edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping-Notes Recipes Cancel))
     until edit_this == 'Cancel'
       case edit_this
       when 'Origin'
         coffee.origin = Manipulate.bean_changer
-        edit_this = prompt.select("What would you like to edit?", %w(Origin Name Cupping-Notes Recipes Cancel))
+        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping-Notes Recipes Cancel))
       when 'Name'
         coffee.name = Manipulate.bean_changer
-        edit_this = prompt.select("What would you like to edit?", %w(Origin Name Cupping-Notes Recipes Cancel))
+        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping-Notes Recipes Cancel))
       when 'Cupping-Notes'
         Manipulate.edit_descriptors(coffee)
-        edit_this = prompt.select("What would you like to edit?", %w(Origin Name Cupping-Notes Recipes Cancel))
+        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping-Notes Recipes Cancel))
       when 'Recipes'
         Manipulate.edit_recipes(coffee)
         # choices = recipe_hash(coffee)
@@ -44,14 +47,31 @@ module Manipulate
         # coffee.recipes[recipe_to_change - 1] = recipe
 
 
-        edit_this = prompt.select("What would you like to edit?", %w(Origin Name Cupping-Notes Recipes Cancel))
+        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping-Notes Recipes Cancel))
       end
     end
+  end
+  
+  def self.search_type
+    prompt = TTY::Prompt.new
+    pastel = Pastel.new
+    search_by = prompt.select(pastel.blue("How would you like to search"), %w(Name Origin))
+    return search_by
+  end
+
+  def self.search_term
+    prompt = TTY::Prompt.new
+    pastel = Pastel.new
+    search_for = prompt.ask(pastel.blue("Please enter the term to search for")) do |search_term|
+      search_term.modify :capitalize
+    end
+    return search_for
   end
 
   def self.edit_descriptors(coffee)
     prompt = TTY::Prompt.new
-    edit_add = prompt.select("What would you like to do?", %w(Add_New Change_Existing Cancel))
+    pastel = Pastel.new
+    edit_add = prompt.select(pastel.blue("What would you like to do?"), %w(Add_New Change_Existing Cancel))
     case edit_add
     when 'Add_New'
       Create.add_descriptors(coffee)
@@ -62,10 +82,11 @@ module Manipulate
       Manipulate.descriptor_changer(update, coffee)
     end
   end
-    
+
   def self.edit_recipes(coffee)
     prompt = TTY::Prompt.new
-    edit_add = prompt.select("What would you like to do?", %w(Add_New Change_Existing Cancel))
+    pastel = Pastel.new
+    edit_add = prompt.select(pastel.blue("What would you like to do?"), %w(Add_New Change_Existing Cancel))
     case edit_add
     when 'Add_New'
       coffee.recipes << Create.build_recipe
@@ -74,7 +95,7 @@ module Manipulate
     end
   end
 
-  # Checks for new descriptor(@highlight, @minimise, @) values and updates if present
+  # Checks for new descriptor (@highlight, @minimise, @tactile) values and updates if present
   def self.descriptor_changer(new_descriptors, coffee)
     !!new_descriptors[0] ? coffee.highlight = [new_descriptors[0]] : nil
     !!new_descriptors[1] ? coffee.minimise = [new_descriptors[1]] : nil
@@ -83,7 +104,8 @@ module Manipulate
 
   def self.bean_changer
     prompt = TTY::Prompt.new
-    new_value = prompt.ask("Please enter new value") do |input|
+    pastel = Pastel.new
+    new_value = prompt.ask(pastel.blue("Please enter new value")) do |input|
       input.required(true, 'New value is required to continue, or re-enter previous value')
     end
     return new_value
@@ -91,8 +113,9 @@ module Manipulate
 
   def self.recipe_changer(coffee)
     prompt = TTY::Prompt.new
+    pastel = Pastel.new
     choices = coffee.recipe_hash
-    selected = prompt.select("Which recipe would you like to edit", choices)
+    selected = prompt.select(pastel.blue("Which recipe would you like to edit"), choices)
     coffee.recipes[selected - 1] = Create.build_recipe
   end
 
@@ -102,5 +125,4 @@ module Manipulate
     file.puts ''
     file.close
   end
-
 end

@@ -39,6 +39,7 @@ PLATFORMS
 
 DEPENDENCIES
   oj
+  pastel
   rspec (~> 3.11)
   tty-file
   tty-prompt

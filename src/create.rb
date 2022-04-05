@@ -16,12 +16,35 @@ module Create
   def self.prompt_recipe
     prompt = TTY::Prompt.new
     result = prompt.collect do
-      key(:dose).ask('Dose:', convert: :float)
-      key(:yield).ask('Yield:', convert: :float)
-      key(:time).ask('Time:', convert: :integer)
-      key(:tds).ask('TDS:', convert: :float)
+      key(:dose).ask('Dose:') do |input|
+        input.required true
+        input.convert(:float, 'Please enter numbers/decimals only')
+      end
+      key(:yield).ask('Yield:') do |input|
+        input.required true
+        input.convert(:float, 'Please enter numbers/decimals only')
+      end
+      key(:time).ask('Time:') do |input|
+        input.required true
+        input.convert(:float, 'Please enter numbers/decimals only')
+      end
+      key(:tds).ask('TDS:') do |input|
+        input.required true
+        input.convert(:float, 'Please enter numbers/decimals only')
+      end
     end
     return [result[:dose], result[:yield], result[:time], result[:tds]]
+  end
+
+  def self.prompt_descriptors
+    prompt = TTY::Prompt.new
+    result = prompt.collect do
+      key(:highlight).ask('Highlight:')
+      key(:minimise).ask('Minimise:')
+      key(:tactile).ask('Tactile:')
+    end
+    flavour = [result[:highlight], result[:minimise], result[:tactile]]
+    return flavour
   end
 
   # Creates a new recipe
@@ -41,7 +64,7 @@ module Create
   end
 
   def self.add_descriptors(coffee)
-    new_descriptors = cupping_notes
+    new_descriptors = Create.prompt_descriptors
     new_descriptors.flatten!
     coffee.highlight << new_descriptors[0]
     coffee.minimise << new_descriptors[1]
