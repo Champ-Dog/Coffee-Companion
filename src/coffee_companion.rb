@@ -1,14 +1,10 @@
-require_relative './coffee'
 require 'json'
 require "tty-prompt"
 require "pastel"
 require 'oj'
-require_relative './manipulate'
-require_relative './create'
-
-
-
-# Call tty-prompt for main loop + clear screen.
+require_relative './modules/coffee'
+require_relative './modules/manipulate'
+require_relative './modules/create'
 
 prompt = TTY::Prompt.new
 pastel = Pastel.new
@@ -20,26 +16,10 @@ system "clear"
 Manipulate.rebuild_coffees
 Manipulate.reshape_coffees
 
-# stored_coffees = Oj.load_file('./coffees.json')
-# stored_coffees.each do |coffee|
-#   rebuilt_coffee = Coffee.new(coffee.origin, coffee.name)
-#   rebuilt_coffee.highlight << coffee.highlight
-#   rebuilt_coffee.minimise << coffee.minimise
-#   rebuilt_coffee.tactile << coffee.tactile
-#   rebuilt_coffee.recipes << coffee.recipes
-# end
-# Coffee.list.each do |coffee|
-#     coffee.highlight.flatten!
-#     coffee.minimise.flatten!
-#     coffee.tactile.flatten!
-#     coffee.recipes.flatten!(1)
-# end
-# App start + welcome
-
 puts pastel.blue("Welcome to the ", pastel.red.underline("Coffee Companion"))
 
 # Main program loop
-# Note that throughout the app several style guide suggestions must be ignored for tty-prompt to function.
+
 begin
   welcome = prompt.select(pastel.blue("What would you like to do?"), %w(Create Search Exit), cycle: true) 
   until welcome == 'Exit'

@@ -1,12 +1,9 @@
 require "tty-prompt"
 require "pastel"
 require "oj"
-
 require_relative './coffee'
 
-# require_relative './coffee'
-
-# This module contains the flow control structures and helper methods necessary to edit or export stored information
+# This module contains the control flow structures and helper methods necessary to edit or export stored information
 # about a coffee.
 module Manipulate
   def self.run_manipulate(coffee)
@@ -67,6 +64,44 @@ module Manipulate
     end
   end
 
+  def self.change_bean
+    prompt = TTY::Prompt.new
+    pastel = Pastel.new
+    new_value = prompt.ask(pastel.blue("Please enter new value")) do |input|
+      input.required(true, 'New value is required to continue, or re-enter previous value')
+    end
+    return new_value
+  end
+
+  def self.change_recipe(coffee)
+    prompt = TTY::Prompt.new
+    pastel = Pastel.new
+    choices = coffee.recipe_hash
+    selected = prompt.select(pastel.blue("Which recipe would you like to edit"), choices, cycle: true)
+    case prompt.select(pastel.blue('What would you like to do?'), %w(Edit Remove), cycle: true)
+    when 'Edit'
+      coffee.recipes[selected - 1] = Create.build_recipe
+    when 'Delete'
+      coffee.recipe_remover(selected - 1)
+    end
+  end
+
+  def self.search_type
+    prompt = TTY::Prompt.new
+    pastel = Pastel.new
+    search_by = prompt.select(pastel.blue("How would you like to search"), %w(Name Origin), cycle: true)
+    return search_by
+  end
+
+  def self.search_term
+    prompt = TTY::Prompt.new
+    pastel = Pastel.new
+    search_for = prompt.ask(pastel.blue("Please enter the term to search for")) do |search_term|
+      search_term.modify :capitalize
+    end
+    return search_for
+  end
+
   # This method is called on startup to rebuild stored coffees from 'coffees.json' Also provides critical
   # error-avoidance by checking there are coffees to restore before beginning.
   def self.rebuild_coffees
@@ -94,73 +129,12 @@ module Manipulate
     end
   end
 
-  def self.search_type
-    prompt = TTY::Prompt.new
-    pastel = Pastel.new
-    search_by = prompt.select(pastel.blue("How would you like to search"), %w(Name Origin), cycle: true)
-    return search_by
-  end
-
-  def self.search_term
-    prompt = TTY::Prompt.new
-    pastel = Pastel.new
-    search_for = prompt.ask(pastel.blue("Please enter the term to search for")) do |search_term|
-      search_term.modify :capitalize
-    end
-    return search_for
-  end
-
-  # def self.edit_descriptors(coffee)
-  #   prompt = TTY::Prompt.new
-  #   pastel = Pastel.new
-  #   edit_add = prompt.select(pastel.blue("What would you like to do?"), %w(Add_New Change_Existing Cancel), cycle: true)
-  #   case edit_add
-  #   when 'Add_New'
-  #     Create.add_descriptors(coffee)
-  #   when 'Change_Existing'
-  #     update = []
-  #     update << Create.prompt_descriptors
-  #     update.flatten!
-  #     Manipulate.descriptor_changer(update, coffee)
-  #   end
-  # end
-
   # Checks for new descriptor(@highlight, @minimise, @tactile) values and updates if present
   def self.descriptor_changer(new_descriptors, coffee)
     new_descriptors[0].nil? ? nil : coffee.highlight = [new_descriptors[0]]
     new_descriptors[1].nil? ? nil : coffee.minimise = [new_descriptors[1]]
     new_descriptors[2].nil? ? nil : coffee.tactile = [new_descriptors[2]]
   end
-
-  def self.change_bean
-    prompt = TTY::Prompt.new
-    pastel = Pastel.new
-    new_value = prompt.ask(pastel.blue("Please enter new value")) do |input|
-      input.required(true, 'New value is required to continue, or re-enter previous value')
-    end
-    return new_value
-  end
-
-  def self.change_recipe(coffee)
-    prompt = TTY::Prompt.new
-    pastel = Pastel.new
-    choices = coffee.recipe_hash
-    selected = prompt.select(pastel.blue("Which recipe would you like to edit"), choices, cycle: true)
-    case prompt.select(pastel.blue('What would you like to do?'), %w(Edit Remove), cycle: true)
-    when 'Edit'
-      coffee.recipes[selected - 1] = Create.build_recipe
-    when 'Delete'
-      coffee.recipe_remover(selected - 1)
-    end
-  end
-
-  # def self.remove_recipe(coffee)
-  #   prompt = TTY::Prompt.new
-  #   pastel = Pastel.new
-  #   choices = coffee.recipe_hash
-  #   selected = prompt.select(pastel.blue("Which recipe would you like to delete"), choices, cycle: true)
-  #   coffee.recipes[selected - 1] = Create.build_recipe
-  # end
 
   def self.coffee_exporter(coffee)
     file = File.open("report.txt", "a")

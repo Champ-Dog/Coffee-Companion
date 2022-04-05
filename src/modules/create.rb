@@ -1,6 +1,6 @@
 require 'tty-prompt'
 
-# This module contains the helper methods and flow control structures used when creating a new Coffee-class object.
+# This module contains the helper methods and control flow structures used when creating a new Coffee-class object.
 module Create
   # This method is used to obtain user input to create a new coffee
   def self.prompt_bean

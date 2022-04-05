@@ -25,6 +25,4 @@ module Calculators
     puts "Your extraction is #{ext}"
     return ext
   end
-
-
 end

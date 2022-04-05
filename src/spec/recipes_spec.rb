@@ -1,4 +1,4 @@
-require_relative '../recipes'
+require_relative '../modules/recipes'
 
 describe Recipes do
   let(:kamwangi) { Coffee.new('kenya', 'kamwangi') }

@@ -1,4 +1,4 @@
-require_relative '../summaries'
+require_relative '../modules/summaries'
 
 describe Summaries do
   let(:kamwangi) { Coffee.new('kenya', 'kamwangi') }

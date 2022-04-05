@@ -1,4 +1,4 @@
-require_relative '../calculators'
+require_relative '../modules/calculators'
 
 describe Calculators do
   let(:dose) { 21 }
