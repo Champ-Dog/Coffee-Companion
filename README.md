@@ -1,4 +1,3 @@
-
 *No.    Requirement
 R1  Answers to all the documentation requirements below.
 R2  Your README.md should have a separate heading for each documentation requirement and answers organised under the appropriate headings.
@@ -12,69 +11,16 @@ You must include:
 - any system/hardware requirements
 - how to use any command line arguments made for the application*
 
-r15
-Design TWO tests which check that the application is running as expected.
-
-Each test should:
-- cover a different feature of the application
-- state what is being tested
-- provide at least TWO test cases and the expected results for each test case
-
-> An outline of the testing procedure and cases should be included with the source code of the application*
-
-## Testing
-
-Modules and Classes intended to be instantiated were developed in accordance with TDD principles, relying heavily on use of rspec. The custom Coffee class was one of the earliest development points for this project; and was coded side-by-side with an extensive coffee_spec document for testing, where possible. The general process followed was:
-- Reduce a problem to the first, smallest step
-- Write a failing test that describes that step, and expected outcome, e.g., 
-```
-it 'capitalizes the origin' do
-  expect(kamwangi.origin).to eq 'Kenya'
-end
-```
-- Run the test
-- Observe the outcome, check error messages if present
-- Write the minimum code needed to rectify the first identified problem
-- Re-test
-
-As a new developer, the overall development and testing process was not as defined and linear as the TDD 'label' would imply. As the requirements of the project quickly expanded beyond my existing knowledge, I relied heavily on 'prototyping' and manually testing to both understand new ideas; and confirm if an intended approach was possible. However, much of this still followed a similar pattern: break down a problem to smallest steps, write the minimum code to complete that step, and test for successful function.
-
-The initial requirements of the Coffee class were obvious, driven by the intent and features of the app. However, as development continued and more complex functionality was implemented, the rspec testing process proved useful in several ways. At times I found it difficult to formulate a clear description and expectation to test or develop a custom method. This was often an indicator of unclear intention (e.g., not fully understanding a problem to be solved, or not fully deconstructing a problem and trying to perform multiple steps at once), or misunderstanding how a particular method or piece of code works. The process of developing clear, single-step tests also highlighted areas of overlapping function. When developing tests for functional 'prototype' code (mentioned above), writing clear tests revealed instances of detrimental complexity in custom methods doing several things at once, and some cases of completely unnecessary function.
-
-Midway through development, with a mostly working model of the app, significant refactoring was necessary. At that point, the majority of app functions were handled by the Coffee class, with a smaller 'Prompt' module housing methods for prompting user input and miscellaneous 'helper' methods, and a separate file containing the main control flow for the app. Refactoring was a significant task, but having a suite of rspec tests already developed made this much simpler; functioning both as an 'instruction guide' to the methods and structures of the app, and a clear indicator of successful refactoring and reintegration.
-
-The 'spec' directory included in this repository contains thirty-eight currently passing tests across four files, that combined should ensure function of instantiable custom classes, modules, and their included methods. Much of the Manipulate and Create modules rely heavily on gems, particularly tty-prompt, which have been tested independently; the rest being 'helper' methods designed primarily to minimise code reuse and allow control flow methods to operate on uniform levels of abstraction. For these reasons (and as a concession to time constraints) frequent manual testing was implemented in place of rspec tests.
-
--------------------------------------------------------------------------------
-
-# Coffee-Companion
+# Coffee Companion
 This repository houses the source code for the Coffee Companion app.
-This app was (and is being) developed as a Terminal Application assessment.
-The function of the app is to record and output information about the performance of a coffee over time; aimed primarily at a head barista or manager.
-
-----------------------------------------------------------------------------
-
-## References
-Coffeekaizen.com. n.d. COFFEE KAIZEN. [online] Available at: <http://coffeekaizen.com/calculators/extcalculator/> [Accessed 1 April 2022].
-
-Rubystyle.guide. 2022. The Ruby Style Guide. [online] Available at: <https://rubystyle.guide/> [Accessed 5 April 2022].
-
------------------------------------------------------------------------
+This project was (and is being) developed as a Terminal Application assessment.
+The function of the app is to record and output information about the performance of a coffee over time; aimed primarily at a head barista or manager. The app will also be of interest to the coffee enthusiast.
 
 ## Source Control
 This source code for this project is hosted at [GitHub](https://github.com/Champ-Dog/Coffee-Companion).
 
 Should the above link not function, you can manually enter this address:
 https://github.com/Champ-Dog/Coffee-Companion
-
------------------------------------------------------------------------
-
-## Code Style
-Code for this project is written in Ruby, and should adhere to [The Ruby Style Guide](https://rubystyle.guide/) to the extent possible. 
-
-In developing this project, I have made use of [RuboCop](https://rubocop.org/) to simplify adherence, as well as referring directly to the material. It has been necessary to violate these conventions in several places for proper code or gem functions.
-
--------------------------------------------------------------------------
 
 ## Features
 The Coffee Companion is a quality assurance tool for baristas and cafe owners/managers. It allows users to be store, search, edit, summarise, and export, information about coffees.
@@ -122,7 +68,28 @@ The Coffee Companion includes an export feature, allowing summaries of selected 
 
 **Technical:** This feature is implemented through Ruby's inbuilt `File` feature. A *report.txt* file is included with the app. Instructions are passed to open the file to append new data, new data is added, and the app is closed. This method is included in the Manipulate module, and is a selectable option once a Search has been successfully completed.
 
--------------------------------------------------------------------------------
+## Testing
+
+Modules and Classes intended to be instantiated were developed in accordance with TDD principles, relying heavily on use of rspec. The custom Coffee class was one of the earliest development points for this project; and was coded side-by-side with an extensive coffee_spec document for testing, where possible. The general process followed was:
+- Reduce a problem to the first, smallest step
+- Write a failing test that describes that step, and expected outcome, e.g., 
+```
+it 'capitalizes the origin' do
+  expect(kamwangi.origin).to eq 'Kenya'
+end
+```
+- Run the test
+- Observe the outcome, check error messages if present
+- Write the minimum code needed to rectify the first identified problem
+- Re-test
+
+As a new developer, the overall development and testing process was not as defined and linear as the TDD 'label' would imply. As the requirements of the project quickly expanded beyond my existing knowledge, I relied heavily on 'prototyping' and manually testing to both understand new ideas; and confirm if an intended approach was possible. However, much of this still followed a similar pattern: break down a problem to smallest steps, write the minimum code to complete that step, and test for successful function.
+
+The initial requirements of the Coffee class were obvious, driven by the intent and features of the app. However, as development continued and more complex functionality was implemented, the rspec testing process proved useful in several ways. At times I found it difficult to formulate a clear description and expectation to test or develop a custom method. This was often an indicator of unclear intention (e.g., not fully understanding a problem to be solved, or not fully deconstructing a problem and trying to perform multiple steps at once), or misunderstanding how a particular method or piece of code works. The process of developing clear, single-step tests also highlighted areas of overlapping function. When developing tests for functional 'prototype' code (mentioned above), writing clear tests revealed instances of detrimental complexity in custom methods doing several things at once, and some cases of completely unnecessary function.
+
+Midway through development, with a mostly working model of the app, significant refactoring was necessary. At that point, the majority of app functions were handled by the Coffee class, with a smaller 'Prompt' module housing methods for prompting user input and miscellaneous 'helper' methods, and a separate file containing the main control flow for the app. Refactoring was a significant task, but having a suite of rspec tests already developed made this much simpler; functioning both as an 'instruction guide' to the methods and structures of the app, and a clear indicator of successful refactoring and reintegration.
+
+The 'spec' directory included in this repository contains thirty-eight currently passing tests across four files, that combined should ensure function of instantiable custom classes, modules, and their included methods. Much of the Manipulate and Create modules rely heavily on gems, particularly tty-prompt, which have been tested independently; the rest being 'helper' methods designed primarily to minimise code reuse and allow control flow methods to operate on uniform levels of abstraction. For these reasons (and as a concession to time constraints) frequent manual testing was implemented in place of rspec tests.
 
 ## Implementation
 ![Kanban board for this project](./docs/coffee-trello.png)
@@ -138,7 +105,10 @@ Other difficulties were in estimating the time needed for given tasks, underesti
 The board also contains a list of additional features that will add value to the app, but are beyond the scope of this assessment. If the in-line link to the Trello board above should fail to function, the board can be found at:
 https://trello.com/b/356sGY0f/coffee-companion
 
-----------------------------------------------------------------------------------
+## Code Style
+Code for this project is written in Ruby, and should adhere to [The Ruby Style Guide](https://rubystyle.guide/) to the extent possible. 
+
+In developing this project, I have made use of [RuboCop](https://rubocop.org/) to simplify adherence, as well as referring directly to the material. These conventions have been violated where necessary for proper code or gem functions.
 
 ## Dependencies
 This is a terminal application, and is written in Ruby. It is therefore necessary to have a terminal environment (e.g., bash, WSL), and to include Ruby + appropriate management in this environment. 
@@ -154,3 +124,7 @@ Gems (Bundled)
 -  tty-file
 -  tty-prompt
 
+## References
+Coffeekaizen.com. n.d. COFFEE KAIZEN. [online] Available at: <http://coffeekaizen.com/calculators/extcalculator/> [Accessed 1 April 2022].
+
+Rubystyle.guide. 2022. The Ruby Style Guide. [online] Available at: <https://rubystyle.guide/> [Accessed 5 April 2022].
