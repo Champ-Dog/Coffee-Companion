@@ -63,7 +63,7 @@ class Coffee
 
   def self_destruct
     Coffee.list.delete(self)
-    puts "Coffee will be deleted when app closes"
+    puts "Coffee deleted!"
   end
 
   # def parameters

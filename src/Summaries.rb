@@ -3,8 +3,7 @@
 # 'summarise_'
 module Summaries
   def summarise_bean
-    # output = []
-    # output << [@origin, @name]
+
     return "#{@origin.upcase} #{@name.upcase}"
   end
 
@@ -39,7 +38,7 @@ module Summaries
     end
     return output
   end
-  
+
   def summarise
     output = []
     output << summarise_bean

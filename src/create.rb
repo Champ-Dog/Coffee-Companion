@@ -22,11 +22,11 @@ module Create
       end
       key(:yield).ask('Yield:') do |input|
         input.required true
-        input.convert(:float, 'Please enter numbers/decimals only')
+        input.convert(:integer, 'Please enter numbers/decimals only')
       end
       key(:time).ask('Time:') do |input|
         input.required true
-        input.convert(:float, 'Please enter numbers/decimals only')
+        input.convert(:integer, 'Please enter numbers/decimals only')
       end
       key(:tds).ask('TDS:') do |input|
         input.required true
@@ -56,18 +56,12 @@ module Create
     return build_recipe.flatten
   end
 
-  # Checks for new descriptor(@highlight, @minimise, @tactile) values and updates if present
-  def self.descriptor_changer(new_descriptors, coffee)
+  def self.add_descriptors(coffee)
+    new_descriptors = Create.prompt_descriptors
+    new_descriptors.flatten!
     new_descriptors[0].nil? ? nil : coffee.highlight = [new_descriptors[0]]
     new_descriptors[1].nil? ? nil : coffee.minimise = [new_descriptors[1]]
     new_descriptors[2].nil? ? nil : coffee.tactile = [new_descriptors[2]]
   end
 
-  def self.add_descriptors(coffee)
-    new_descriptors = Create.prompt_descriptors
-    new_descriptors.flatten!
-    coffee.highlight << new_descriptors[0]
-    coffee.minimise << new_descriptors[1]
-    coffee.tactile << new_descriptors[2]
-  end
 end

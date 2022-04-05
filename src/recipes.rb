@@ -56,4 +56,9 @@ module Recipes
     end
     return hash
   end
+
+  def recipe_removal(index)
+    Self.recipes.delete(index)
+    puts "Coffee deleted!"
+  end
 end

@@ -1,5 +1,8 @@
 require "tty-prompt"
 require "pastel"
+require "oj"
+
+require_relative './coffee'
 
 # require_relative './coffee'
 
@@ -9,15 +12,15 @@ module Manipulate
   def self.run_manipulate(coffee)
     prompt = TTY::Prompt.new
     pastel = Pastel.new
-    manipulate_coffee = prompt.select(pastel.blue("What would you like to do?"), %w(Edit Export Delete Cancel))
+    manipulate_coffee = prompt.select(pastel.blue("What would you like to do?"), %w(Edit Export Delete Cancel), cycle: true)
     until manipulate_coffee == 'Cancel'
       case manipulate_coffee
       when 'Edit'
         Manipulate.edit_coffee(coffee)
-        manipulate_coffee = prompt.select(pastel.blue("What would you like to do?"), %w(Edit Export Delete Cancel))
+        manipulate_coffee = prompt.select(pastel.blue("What would you like to do?"), %w(Edit Export Delete Cancel), cycle: true)
       when 'Export'
-        export_coffee(coffee)
-        manipulate_coffee = prompt.select(pastel.blue("What would you like to do?"), %w(Edit Export Delete Cancel))
+        Manipulate.coffee_exporter(coffee)
+        manipulate_coffee = prompt.select(pastel.blue("What would you like to do?"), %w(Edit Export Delete Cancel), cycle: true)
       when 'Delete'
         coffee.self_destruct
         break
@@ -28,34 +31,73 @@ module Manipulate
   def self.edit_coffee(coffee)
     prompt = TTY::Prompt.new
     pastel = Pastel.new
-    edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping-Notes Recipes Cancel))
+    edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping_Notes Recipes Cancel), cycle: true)
     until edit_this == 'Cancel'
       case edit_this
       when 'Origin'
-        coffee.origin = Manipulate.bean_changer
-        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping-Notes Recipes Cancel))
+        coffee.origin = Manipulate.change_bean
+        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping_Notes Recipes Cancel), cycle: true)
       when 'Name'
-        coffee.name = Manipulate.bean_changer
-        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping-Notes Recipes Cancel))
-      when 'Cupping-Notes'
-        Manipulate.edit_descriptors(coffee)
-        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping-Notes Recipes Cancel))
+        coffee.name = Manipulate.change_bean
+        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping_Notes Recipes Cancel), cycle: true)
+      when 'Cupping_Notes'
+        Create.add_descriptors(coffee)
+        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping_Notes Recipes Cancel), cycle: true)
       when 'Recipes'
         Manipulate.edit_recipes(coffee)
-        # choices = recipe_hash(coffee)
-        # recipe_to_change = select_recipe(choices)
-        # coffee.recipes[recipe_to_change - 1] = recipe
-
-
-        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping-Notes Recipes Cancel))
+        edit_this = prompt.select(pastel.blue("What would you like to edit?"), %w(Origin Name Cupping_Notes Recipes Cancel), cycle: true)
       end
     end
   end
-  
+
+  def self.edit_recipes(coffee)
+    prompt = TTY::Prompt.new
+    pastel = Pastel.new
+    begin
+      edit_add = prompt.select(pastel.blue("What would you like to do?"), %w(Add_New Edit_Existing Cancel), cycle: true)
+      case edit_add
+      when 'Add_New'
+        coffee.recipes << Create.build_recipe
+      when 'Edit_Existing'
+        Manipulate.change_recipe(coffee)
+      end
+    rescue NoMethodError
+      puts 'No recipes yet!'
+      retry
+    end
+  end
+
+  # This method is called on startup to rebuild stored coffees from 'coffees.json' Also provides critical
+  # error-avoidance by checking there are coffees to restore before beginning.
+  def self.rebuild_coffees
+    stored_coffees = Oj.load_file('./coffees.json')
+    return nil if stored_coffees.nil?
+
+    stored_coffees.each do |coffee|
+      rebuilt_coffee = Coffee.new(coffee.origin, coffee.name)
+      rebuilt_coffee.highlight << coffee.highlight
+      rebuilt_coffee.minimise << coffee.minimise
+      rebuilt_coffee.tactile << coffee.tactile
+      rebuilt_coffee.recipes << coffee.recipes
+    end
+  end
+
+  # This method is called on startup, after Manipulate.rebuild_coffees. It flattens the stored attribute information of
+  # all coffees - rebuild_coffees results in multi-dimensional arrays; impacting app function. Flatten depth set to 1
+  # for @recipes to preserve complete, separate recipes.
+  def self.reshape_coffees
+    Coffee.list.each do |coffee|
+      coffee.highlight.flatten!
+      coffee.minimise.flatten!
+      coffee.tactile.flatten!
+      coffee.recipes.flatten!(1)
+    end
+  end
+
   def self.search_type
     prompt = TTY::Prompt.new
     pastel = Pastel.new
-    search_by = prompt.select(pastel.blue("How would you like to search"), %w(Name Origin))
+    search_by = prompt.select(pastel.blue("How would you like to search"), %w(Name Origin), cycle: true)
     return search_by
   end
 
@@ -68,41 +110,29 @@ module Manipulate
     return search_for
   end
 
-  def self.edit_descriptors(coffee)
-    prompt = TTY::Prompt.new
-    pastel = Pastel.new
-    edit_add = prompt.select(pastel.blue("What would you like to do?"), %w(Add_New Change_Existing Cancel))
-    case edit_add
-    when 'Add_New'
-      Create.add_descriptors(coffee)
-    when 'Change_Existing'
-      update = []
-      update << cupping_notes
-      update.flatten!
-      Manipulate.descriptor_changer(update, coffee)
-    end
-  end
+  # def self.edit_descriptors(coffee)
+  #   prompt = TTY::Prompt.new
+  #   pastel = Pastel.new
+  #   edit_add = prompt.select(pastel.blue("What would you like to do?"), %w(Add_New Change_Existing Cancel), cycle: true)
+  #   case edit_add
+  #   when 'Add_New'
+  #     Create.add_descriptors(coffee)
+  #   when 'Change_Existing'
+  #     update = []
+  #     update << Create.prompt_descriptors
+  #     update.flatten!
+  #     Manipulate.descriptor_changer(update, coffee)
+  #   end
+  # end
 
-  def self.edit_recipes(coffee)
-    prompt = TTY::Prompt.new
-    pastel = Pastel.new
-    edit_add = prompt.select(pastel.blue("What would you like to do?"), %w(Add_New Change_Existing Cancel))
-    case edit_add
-    when 'Add_New'
-      coffee.recipes << Create.build_recipe
-    when 'Change_Existing'
-      Manipulate.recipe_changer(coffee)
-    end
-  end
-
-  # Checks for new descriptor (@highlight, @minimise, @tactile) values and updates if present
+  # Checks for new descriptor(@highlight, @minimise, @tactile) values and updates if present
   def self.descriptor_changer(new_descriptors, coffee)
-    !!new_descriptors[0] ? coffee.highlight = [new_descriptors[0]] : nil
-    !!new_descriptors[1] ? coffee.minimise = [new_descriptors[1]] : nil
-    !!new_descriptors[2] ? coffee.tactile = [new_descriptors[2]] : nil
+    new_descriptors[0].nil? ? nil : coffee.highlight = [new_descriptors[0]]
+    new_descriptors[1].nil? ? nil : coffee.minimise = [new_descriptors[1]]
+    new_descriptors[2].nil? ? nil : coffee.tactile = [new_descriptors[2]]
   end
 
-  def self.bean_changer
+  def self.change_bean
     prompt = TTY::Prompt.new
     pastel = Pastel.new
     new_value = prompt.ask(pastel.blue("Please enter new value")) do |input|
@@ -111,13 +141,26 @@ module Manipulate
     return new_value
   end
 
-  def self.recipe_changer(coffee)
+  def self.change_recipe(coffee)
     prompt = TTY::Prompt.new
     pastel = Pastel.new
     choices = coffee.recipe_hash
-    selected = prompt.select(pastel.blue("Which recipe would you like to edit"), choices)
-    coffee.recipes[selected - 1] = Create.build_recipe
+    selected = prompt.select(pastel.blue("Which recipe would you like to edit"), choices, cycle: true)
+    case prompt.select(pastel.blue('What would you like to do?'), %w(Edit Remove), cycle: true)
+    when 'Edit'
+      coffee.recipes[selected - 1] = Create.build_recipe
+    when 'Delete'
+      coffee.recipe_remover(selected - 1)
+    end
   end
+
+  # def self.remove_recipe(coffee)
+  #   prompt = TTY::Prompt.new
+  #   pastel = Pastel.new
+  #   choices = coffee.recipe_hash
+  #   selected = prompt.select(pastel.blue("Which recipe would you like to delete"), choices, cycle: true)
+  #   coffee.recipes[selected - 1] = Create.build_recipe
+  # end
 
   def self.coffee_exporter(coffee)
     file = File.open("report.txt", "a")
