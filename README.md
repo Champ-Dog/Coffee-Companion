@@ -54,15 +54,17 @@ After initial setup, the app should run automatically. After this first session,
 - Do `ruby coffee_companion.rb`
 
 The app accepts several command line arguments when following this method:
-`-a`: Displays 'About' information for the app, including version number and version release date, without running the app UI.
+`-a`: Displays information about the app, without running the app UI.
 `-l`: Will display a list of all stored coffees, without running the app UI.
 `-r`: Will export summary information of all stored coffees, without running the app UI.
 `-h`: Will display the contents of the help file, without running the app UI.
 
 These arguments can be included when running the app via the steps above. For example do: `ruby coffee_companion.rb -a`
-Multiple arguments can be included (e.g., `ruby coffee_companion.rb -a -l`).
+Only the first included argument will be accepted, others will be disregarded.
 
 Detailed instructions on using the app can be found in the *help.txt* file, or by using the `-h` argument as described above.
+
+**NOTE**: The app comes with 'test' data pre-loaded to allow exploration of app functions. Three coffees are included: *Kenya Kamwangi*, *Kenya Gacatha*, and *Colombia La Serrania*. Modelled on real coffees, these all have differing amounts of stored information. These will allow demonstration of searches by both name and origin, as well as other app features. The *report.txt* file contains a pre-generated report for Kenya Kamwangi, to demonstrate the export function.
 
 ## Source Control
 This source code for this project is hosted at [GitHub](https://github.com/Champ-Dog/Coffee-Companion).
