@@ -1,36 +1,51 @@
+# The following two sections check that dependencies are available before launching the main loop of the app.
 begin
   require 'json'
   require "tty-prompt"
   require "pastel"
   require 'oj'
 rescue LoadError
-  puts 'Error: Dependencies'
-  puts 'Please follow setup instructions in README, then try again'
+  puts 'Sorry, an error occurred loading dependencies'
+  puts 'Please follow setup instructions in README, and try again'
 end
 
 begin
+  require_relative './modules/args'
   require_relative './modules/coffee'
   require_relative './modules/manipulate'
   require_relative './modules/create'
 rescue LoadError
   puts 'Necessary files missing'
   puts 'Please rebuild app from source repository'
+rescue StandardError
+   puts 'Sorry, an unexpected error occured. Ending program.'
+end
+
+# Rebuilds coffees from coffees.json - flattening is required to avoid multi-dimensional arrays.
+# Importantly, @recipes needs to have depth set to one on flatten, as seperate recipes need seperate arrays.
+Manipulate.rebuild_coffees
+Manipulate.reshape_coffees
+
+# This responds to any CLI arguments provided
+begin
+  ARGV.include?('-a') ? Arguments.about : nil
+  ARGV.include?('-l') ? Arguments.list_all : nil
+  ARGV.include?('-h') ? Arguments.help : nil
+  ARGV.include?('-r') ? Arguments.report_all : nil
+rescue Interrupt
+  system "clear"
+  puts 'You ended the program.'
+rescue StandardError
+  system "clear"
+  puts 'Sorry, an unexpected error occured. Ending program.'
 end
 
 prompt = TTY::Prompt.new
 pastel = Pastel.new
 system "clear"
-
-# Rebuilds coffees from coffees.json - flattening is required to avoid multi-dimensional arrays.
-# Importantly, @recipes needs to have depth set to one on flatten, as seperate recipes need seperate arrays.
-
-Manipulate.rebuild_coffees
-Manipulate.reshape_coffees
-
 puts pastel.blue("Welcome to the ", pastel.red.underline("Coffee Companion"))
 
 # Main program loop
-
 begin
   welcome = prompt.select(pastel.blue("What would you like to do?"), %w(Create Search Exit), cycle: true) 
   until welcome == 'Exit'

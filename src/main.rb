@@ -1,4 +1,13 @@
-
+begin
+  require_relative '../modules/args'
+rescue LoadError
+  system "clear"
+  puts 'Necessary files missing'
+  puts 'Please rebuild app from source repository'
+rescue StandardError
+  system "clear"
+  puts 'Sorry, an unexpected error occured. Ending program.'
+end
 
 begin
   ARGV.include?('-a') ? about : nil
