@@ -41,7 +41,7 @@ More information (and a link to suggested fixes) can be found in the gem's [GitH
 
 - Download the program from [this repository](https://github.com/Champ-Dog/Coffee-Companion) by pressing the 'Code' button and selecting 'Download ZIP'
 - Once downloaded, unzip the contents to the location of your choice
-- Using your command line interface (CLI), navigate to the unzipped Coffee Companion folder
+- Using your command line interface (CLI), navigate to the unzipped Coffee Companion/src/ folder
 - To begin initial setup, do `./setup.sh`
 - This will install the dependencies and launch the program
 
@@ -50,7 +50,7 @@ More information (and a link to suggested fixes) can be found in the gem's [GitH
 ## Starting the App
 
 After initial setup, the app should run automatically. After this first session, to start the app:
-- Navigate to the unzipped Coffee Companion folder using your CLI
+- Navigate to the unzipped Coffee Companion/src/ folder using your CLI
 - Do `ruby coffee_companion.rb`
 
 The app accepts several command line arguments when following this method:
