@@ -36,7 +36,7 @@ describe Summaries do
       expect(kamwangi.summarise_descriptors[1]).to be_a(String)
     end
 
-    it 'returns the stored values of @highlight, @minimise, and @tactile, in seperate arrays' do
+    it 'returns the stored values of @highlight, @minimise, and @tactile, in separate arrays' do
       expect(kamwangi.summarise_descriptors.length).to eq 3
     end
 

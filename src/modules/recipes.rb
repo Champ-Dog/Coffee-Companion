@@ -1,7 +1,7 @@
 require_relative './calculators'
 
-# This module introduces recipe functionality to coffees. Recipes have been seperated from other attributes of the
-# Coffee class as they behave slightly differently. Individual recipes need to remain as seperate arrays; whereas all
+# This module introduces recipe functionality to coffees. Recipes have been separated from other attributes of the
+# Coffee class as they behave slightly differently. Individual recipes need to remain as separate arrays; whereas all
 # flavour descriptors of a given attribute (e.g., @highlight) can be treated as one, or multiple, string objects with
 # minimal impact on performance. As a result, the editing, manipulation, and exporting, of recipes needs to be
 # handled differently. The @recipe attribute also requires calculation methods unnecessary for other attributes.

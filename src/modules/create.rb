@@ -63,5 +63,4 @@ module Create
     new_descriptors[1].nil? ? nil : coffee.minimise = [new_descriptors[1]]
     new_descriptors[2].nil? ? nil : coffee.tactile = [new_descriptors[2]]
   end
-
 end

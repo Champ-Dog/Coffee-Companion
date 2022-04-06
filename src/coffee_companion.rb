@@ -22,7 +22,7 @@ rescue StandardError
 end
 
 # Rebuilds coffees from coffees.json - flattening is required to avoid multi-dimensional arrays.
-# Importantly, @recipes needs to have depth set to one on flatten, as seperate recipes need seperate arrays.
+# Importantly, @recipes needs to have depth set to one on flatten, as separate recipes need separate arrays.
 Manipulate.rebuild_coffees
 Manipulate.reshape_coffees
 
