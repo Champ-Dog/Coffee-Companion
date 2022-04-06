@@ -2,9 +2,9 @@
 
 begin
   ARGV.include?('-a') ? about : nil
-  ARGV.include?('-r') ? report_all : nil
   ARGV.include?('-l') ? list_all : nil
   ARGV.include?('-h') ? help : nil
+  ARGV.include?('-r') ? report_all : nil
 rescue Interrupt
   system "clear"
   puts 'You ended the program.'

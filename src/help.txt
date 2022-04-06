@@ -1,0 +1,140 @@
+THE COFFEE COMPANION
+
+HELP FILE v 1.0.0
+
+CONTENTS
+1 - System Requirements
+2 - Installation and Setup
+3 - Starting the App
+4 - Using the App
+5 - Glossary
+6 - Notes
+
+1. SYSTEM REQUIREMENTS
+The Coffee Companion is coded with Ruby and relies on a bash script for initial configuration.
+As such, the app requires a bash shell with Ruby configured in the environment. Refer to README for more information on configuring Ruby.
+
+NOTE: One of the Ruby gems (tty-prompt) used in the Coffee Companion may encounter issues running from Git Bash on Windows systems.
+More information (and a link to suggested fixes) can be found in the gem's GitHub repository:
+(https://github.com/piotrmurach/tty-prompt#windows-support)
+
+
+2. INSTALLATION AND SETUP
+
+- Download the program from (https://github.com/Champ-Dog/Coffee-Companion) by pressing the 'Code' button and selecting 'Download ZIP'
+- Once downloaded, unzip the contents to the location of your choice
+- Using your command line interface (CLI), navigate to the unzipped Coffee Companion folder
+- To begin initial setup, do './setup.sh'
+- This will install the dependencies and launch the program
+
+NOTE: You will not be able to utilise the included CLI arguments when setting up and starting the app this way
+
+
+3. STARTING THE APP
+
+After initial setup, the app should run automatically. After this first session, to start the app:
+- Navigate to the unzipped Coffee Companion folder using your CLI
+- Do 'ruby coffee_companion.rb'
+
+The app accepts several command line arguments when following this method:
+'-a': Displays 'About' information for the app, including version number and version release date.
+'-l': Will display a list of all stored coffees on start-up.
+'-r': Will export summary information of all stored coffees, without running the app UI.
+'-h': Will display the contents of the help file (this document).
+
+These arguments can be included when running the app via the steps above. For example, do: 'ruby coffee_companion.rb -a'
+Multiple arguments can be included (e.g., 'ruby coffee_companion.rb -a -l').
+Note that including '-r' in any position will prevent app UI from launching.
+
+
+4. USING THE APP
+
+On running the app, you will be presented with a terminal-based UI. You will be presented with a selection menu, scrollable with arrow keys.
+
+Creating a new entry:
+---------------------
+This process was designed to be as quick as possible, to minimise time loss in dial-in or while on-bar.
+Select 'Create.' You will be prompted for information, which you can enter with the keyboard (press 'Enter' to confirm input).
+You *must* enter values for the origin and name of the bean you wish to track. These are the essential identifiers used to search + edit entries.
+The app will automatically capitalise the first (and ONLY the first) word entered for these prompts.
+
+Once this is done, you will be given the choice to enter EITHER cupping notes or a recipe for the coffee you are entering.
+Alternatively, you may select 'No' to finish the process with only an origin and name for the coffee.
+
+Cupping Notes: The app will prompt you for inputs for highlight (flavours to maximise in the cup), minimise (flavours to reduce) and tactile (texture and mouthfeel).
+It is not necessary to provide values for all, or any, of these inputs.
+
+Recipe: You will be prompted to provide input for recipe parameters DOSE, YIELD, TIME, and TDS. These values are required, and the app will enforce whole numbers where appropriate (refer to Glossary if uncertain).
+Note that where decimal values are allowed, they *may* be entered up to any decimal place (although there is no benefit in doing so).
+However, for calculating EXT your TDS value will be reduced to one decimal place, as per industry standard.
+
+Once this process completes, a new entry will be created, and you will be returned to the start menu.
+
+Interacting with existing entries:
+----------------------------------
+This is done by selecting Search. You will be prompted to choose to search by Origin, or Name. You will then be prompted for a search term.
+Search terms are case-agnostic and will return only full matches (i.e., a coffee named La Serrania will return as a match for 'la serrania' or 'lA sErRaNiA', but not 'serrania').
+Matches will display on-screen, and you will be prompted to make a selection.
+
+A summary of information about the selected coffee will be displayed on the screen, including a recipe 'range' on minimum and maximum values for each defined parameter.
+A new selection prompt will appear, allowing you to choose between EDIT, EXPORT, DELETE or CANCEL. 
+
+EDIT: You will be prompted through similar processes to creating a new coffee, but allowing Origin, Name, Cupping Notes, or Recipes to be altered individually.
+This may be repeated indefinitely; allowing you to enter, change, or remove as much information as desired. 
+If Origin or Name are selected, new values *must* be provided. These values OVERWRITE existing information, edits here are not additive.
+If Cupping Notes is selected, you may choose to leave any of the three prompts blank (by pressing 'Enter') to leave existing values untouched; any values you input will OVERWRITE existing information.
+If Recipes is selected, you may select from 'Edit_Existing', allowing you to OVERWRITE or DELETE and existing entry, or ' Add_New' to add a new recipe. 
+
+Choosing Cancel will return you to the previous menu.
+
+EXPORT: This will export a summary of information about the chosen coffee to report.txt file. This will APPEND the new summary to the existing file, not overwrite it, to allow multiple coffees to be included in a report.
+If this file is deleted, the app should automatically generate a new report.txt file when you next export a coffee. Note that this file is ADDED TO, not overwritten, by the export process.
+This allows several coffees to be included in a report; but requires you to remove existing information when appropriate.
+
+DELETE: This will remove a stored coffee from the app. This process cannot be reversed.
+
+CANCEL: This will return you to the start menu.
+
+Saving Entries:
+---------------
+During a session, information is stored automatically. Upon exiting the app by selecting EXIT, the app will save this information in the file coffees.json. 
+DO NOT DELETE THIS FILE. The app can generate a new file, however you will lose your stored information if this file is removed or damaged.
+If the program closes unexpectedly (using Ctrl+C command, unexpected termination, etc), your entries may not be saved properly.
+
+Closing the app:
+----------------
+Once returned to the start menu, select 'Exit' to close the app. It is important to close the app this way to ensure information is properly saved.
+
+
+5. GLOSSARY
+
+The Coffee Companion is aimed at coffee professionals and enthusiasts; and contains terms that may be otherwise unfamiliar.
+Currently the app is designed for espresso coffee only, which informs the following definitions.
+
+DOSE - This refers to the dry coffee mass used to prepare a beverage. Typically expressed in grams, to 0.5g increments.
+The app assumes grams and will not accept the 'g' suffix (e.g., enter values as 21 or 20.5, not 21g or 20.5g). 
+
+YIELD - Refers to the mass of coffee beverage produced (excluding the vessel). Typically expressed in whole grams.
+The app assumes grams and will not accept the 'g' suffix (e.g., enter values as 45, not 45g).
+
+TIME - The time for which the coffee is brewed, expressed in whole seconds, no increments.
+The app assumes seconds and will not accept the 's' suffix (e.g., enter values as 26, not 26s).
+
+TDS - Total Dissolved Solids. Typically expressed as a percentage, to 0.1 increments (e.g., 8.8%).
+This a measure of coffee mass present in the prepared beverage (e.g., 8.8% of final beverage is coffee solids), as measured by a refractometer.
+Can also be calculated and expressed as grams (e.g., 4.4g of coffee solids), but this is rarely used in the coffee industry.
+The app assumes a precentage and will not accept the '%' suffix (e.g., enter values as 9.2, not 9.2%).
+
+EXT - Shortened from 'extraction,' is a measure of how much of the DOSE (dry coffee mass) was extracted into the cup.
+Typically expressed as a percentage, to two decimal places (e.g., 22.55% of dry coffee mass was extracted).
+The app will calculate this automatically and display the calculated value, without % suffix.
+
+
+6. NOTES
+
+Calculations
+------------
+Calculations assume moisture and C02 as 0. These are difficult to measure and rarely used; in the majority of cases any values used for these in calculations are estimations.
+As such, there is no benefit to assuming a given value over assuming 0; and drawbacks in added complexity which is difficult to check or confirm.
+The most critical point with these assumptions is to keep them consistent to avoid differing results.
+

@@ -1,20 +1,68 @@
-*No.    Requirement
-R1  Answers to all the documentation requirements below.
-R2  Your README.md should have a separate heading for each documentation requirement and answers organised under the appropriate headings.
-
-*R8 
-Design help documentation which includes a set of instructions which accurately describe how to use and install the application.
-
-You must include:
-- steps to install the application
-- any dependencies required by the application to operate
-- any system/hardware requirements
-- how to use any command line arguments made for the application*
-
 # Coffee Companion
 This repository houses the source code for the Coffee Companion app.
 This project was (and is being) developed as a Terminal Application assessment.
 The function of the app is to record and output information about the performance of a coffee over time; aimed primarily at a head barista or manager. The app will also be of interest to the coffee enthusiast.
+
+This project is a tool to simplify the quality assurance process in a cafe, and currently supports only espresso-based coffee. The recommended process includes three steps: Assess, Brew, Report.
+
+**Assess**
+Coffees should be assessed *before* being introduced on bar. This is best done through cupping, *by the people who will be brewing and/or serving the coffee,* and in the context of a cafe QA process. Context is important: a roaster or coffee buyer will have different intentions for cupping, and will focus their attention and output differently. 
+
+To assist with this focus, the app stores cupping notes and descriptors in the format Highlight/Minimise/Tactile. Recording the aspects of a coffee to be maximised or minimised in the cup, and information about it's texture, provides helpful context and reference when dialling in.
+
+Ideally, cupping should be done in a group setting, with as many relevant stakeholders as is practical. Bar and floor staff are excellent candidates, as a starting point. Generating feedback from a group can help to reduce the impact of individual bias and preference.
+
+**Brew**
+When dailling in a coffee for service, refer to stored cupping notes. This can help ensure the coffee that is served is the best representation of the bean. Having an existing reference can aid in deciding what 'tastes best'; and also help to reduce the role of personal preferences in this decision.
+Make sure to record recipes where each barista will know to find them, and keep these for reference in the next dial-in.
+Recipes can be easily stored in the app.
+
+**Report**
+The Coffee Companion quickly generates reports to distribute to relevant stakeholders. These reports will tasting notes, and the min - max range for recipes. This information can be useful to roasters, cafe owners and managers, baristas, and other cafes serving the same coffees (such as multi-venue businesses).
+
+## Dependencies
+This project is coded with Ruby, and relies on a bash script for initial configuration. As such, the app requires a bash shell with Ruby configured in the environment. 
+
+More information about implementing a Ruby environment can be found [here.](https://www.ruby-lang.org/en/documentation/installation/)
+
+Windows-specific information can be found [here.](https://rubyinstaller.org/about/)
+
+**Gems (configured automatically on setup)**
+-  oj
+-  pastel
+-  rspec (for testing)
+-  tty-file
+-  tty-prompt
+
+**NOTE:** tty-prompt may encounter issues running from Git Bash on Windows systems.
+More information (and a link to suggested fixes) can be found in the gem's [GitHub repository](https://github.com/piotrmurach/tty-prompt#windows-support).
+
+## Installation and Setup
+
+- Download the program from [this repository](https://github.com/Champ-Dog/Coffee-Companion) by pressing the 'Code' button and selecting 'Download ZIP'
+- Once downloaded, unzip the contents to the location of your choice
+- Using your command line interface (CLI), navigate to the unzipped Coffee Companion folder
+- To begin initial setup, do `./setup.sh`
+- This will install the dependencies and launch the program
+
+**NOTE:** You will not be able to utilise the included CLI arguments when setting up and starting the app this way
+
+## Starting the App
+
+After initial setup, the app should run automatically. After this first session, to start the app:
+- Navigate to the unzipped Coffee Companion folder using your CLI
+- Do `ruby coffee_companion.rb`
+
+The app accepts several command line arguments when following this method:
+`-a`: Displays 'About' information for the app, including version number and version release date, without running the app UI.
+`-l`: Will display a list of all stored coffees, without running the app UI.
+`-r`: Will export summary information of all stored coffees, without running the app UI.
+`-h`: Will display the contents of the help file, without running the app UI.
+
+These arguments can be included when running the app via the steps above. For example do: `ruby coffee_companion.rb -a`
+Multiple arguments can be included (e.g., `ruby coffee_companion.rb -a -l`).
+
+Detailed instructions on using the app can be found in the *help.txt* file, or by using the `-h` argument as described above.
 
 ## Source Control
 This source code for this project is hosted at [GitHub](https://github.com/Champ-Dog/Coffee-Companion).
@@ -110,19 +158,7 @@ Code for this project is written in Ruby, and should adhere to [The Ruby Style G
 
 In developing this project, I have made use of [RuboCop](https://rubocop.org/) to simplify adherence, as well as referring directly to the material. These conventions have been violated where necessary for proper code or gem functions.
 
-## Dependencies
-This is a terminal application, and is written in Ruby. It is therefore necessary to have a terminal environment (e.g., bash, WSL), and to include Ruby + appropriate management in this environment. 
 
-More information about implementing a Ruby environment can be found [here.](https://www.ruby-lang.org/en/documentation/installation/)
-
-Windows-specific information can be found [here.](https://rubyinstaller.org/about/)
-
-Gems (Bundled)
--  oj
--  pastel
--  rspec (for testing)
--  tty-file
--  tty-prompt
 
 ## References
 Coffeekaizen.com. n.d. COFFEE KAIZEN. [online] Available at: <http://coffeekaizen.com/calculators/extcalculator/> [Accessed 1 April 2022].

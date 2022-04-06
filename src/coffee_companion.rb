@@ -87,6 +87,7 @@ rescue StandardError
   system "clear"
   puts 'Sorry, an unexpected error occured. Ending program.'
 end
+
 puts pastel.blue('Thank you for using the ', pastel.red.underline('Coffee Companion'))
 puts pastel.blue('Goodbye!')
 

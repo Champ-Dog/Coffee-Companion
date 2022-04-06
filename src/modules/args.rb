@@ -7,7 +7,8 @@ module Arguments
   end
 
   def report_all
-  Manipulate.coffee_exporter(Coffee.list)
+    Manipulate.coffee_exporter(Coffee.list)
+    exit
   end
 
   def list_all
