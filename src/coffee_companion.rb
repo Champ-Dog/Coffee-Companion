@@ -1,10 +1,21 @@
-require 'json'
-require "tty-prompt"
-require "pastel"
-require 'oj'
-require_relative './modules/coffee'
-require_relative './modules/manipulate'
-require_relative './modules/create'
+begin
+  require 'json'
+  require "tty-prompt"
+  require "pastel"
+  require 'oj'
+rescue LoadError
+  puts 'Error: Dependencies'
+  puts 'Please follow setup instructions in README, then try again'
+end
+
+begin
+  require_relative './modules/coffee'
+  require_relative './modules/manipulate'
+  require_relative './modules/create'
+rescue LoadError
+  puts 'Necessary files missing'
+  puts 'Please rebuild app from source repository'
+end
 
 prompt = TTY::Prompt.new
 pastel = Pastel.new
@@ -79,5 +90,10 @@ end
 puts pastel.blue('Thank you for using the ', pastel.red.underline('Coffee Companion'))
 puts pastel.blue('Goodbye!')
 
-save_coffees = Coffee.list
-Oj.to_file('./coffees.json', save_coffees)
+begin
+  save_coffees = Coffee.list
+  Oj.to_file('./coffees.json', save_coffees)
+rescue StandardError
+  puts 'Sorry, an unexpected error occured.'
+  puts 'Unable to save coffees. Ending program'
+end

@@ -1,6 +1,6 @@
-# This module provides summary functionality to the Coffee class, allowing stored data to summarised in an easily readable format
-# for display and export. To avoid confusion between methods and aid troubleshooting, begin names with prefix
-# 'summarise_'
+# This module provides summary functionality to the Coffee class, allowing stored data to summarised in an easily
+# readable format for display and export. To avoid confusion between methods and aid troubleshooting, begin names
+# with prefix 'summarise_'
 module Summaries
   def summarise_bean
     return "#{@origin.upcase} #{@name.upcase}"

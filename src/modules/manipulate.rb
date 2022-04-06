@@ -1,6 +1,7 @@
 require "tty-prompt"
 require "pastel"
 require "oj"
+
 require_relative './coffee'
 
 # This module contains the control flow structures and helper methods necessary to edit or export stored information
