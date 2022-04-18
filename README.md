@@ -6,6 +6,7 @@ The function of the app is to record and output information about the performanc
 This project is a tool to simplify the quality assurance process in a cafe, and currently supports only espresso-based coffee. The recommended process includes three steps: Assess, Brew, Report.
 
 **Assess**
+
 Coffees should be assessed *before* being introduced on bar. This is best done through cupping, *by the people who will be brewing and/or serving the coffee,* and in the context of a cafe QA process. Context is important: a roaster or coffee buyer will have different intentions for cupping, and will focus their attention and output differently. 
 
 To assist with this focus, the app stores cupping notes and descriptors in the format Highlight/Minimise/Tactile. Recording the aspects of a coffee to be maximised or minimised in the cup, and information about it's texture, provides helpful context and reference when dialling in.
@@ -13,11 +14,13 @@ To assist with this focus, the app stores cupping notes and descriptors in the f
 Ideally, cupping should be done in a group setting, with as many relevant stakeholders as is practical. Bar and floor staff are excellent candidates, as a starting point. Generating feedback from a group can help to reduce the impact of individual bias and preference.
 
 **Brew**
+
 When dailling in a coffee for service, refer to stored cupping notes. This can help ensure the coffee that is served is the best representation of the bean. Having an existing reference can aid in deciding what 'tastes best'; and also help to reduce the role of personal preferences in this decision.
 Make sure to record recipes where each barista will know to find them, and keep these for reference in the next dial-in.
 Recipes can be easily stored in the app.
 
 **Report**
+
 The Coffee Companion quickly generates reports to distribute to relevant stakeholders. These reports will tasting notes, and the min - max range for recipes. This information can be useful to roasters, cafe owners and managers, baristas, and other cafes serving the same coffees (such as multi-venue businesses).
 
 ## Dependencies
